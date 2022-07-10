@@ -23,7 +23,6 @@
     {% block extra_head %}{% endblock extra_head %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
-
 <body class="bg-gray-100 dark:bg-dark-main  ">
     
     <!-- NAVBAR -->
@@ -32,20 +31,22 @@
     <!--CONTENT-->
      <div class="flex justify-center h-screen ">
         <!--left sidebar-->
-        <div class="w-1/5 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0 scrollbar-hide">
+        <div class="w-1/5 pt-16 h-full hidden xl:flex flex-col fixed top-0 left-0 scrollbar-hide bg-white shadow">
         {% block left_sidebar %}{% endblock left_sidebar %}
         </div>
 
         <!--main content-->
-        <div class="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2">
+        <div class="w-full lg:w-2/3 xl:w-2/5 pt-32 lg:pt-16 px-2" >
         {% block messages %}{% include 'messages.html' %}{% endblock messages %}
         {% block content %}{% endblock content %}
         </div>
 
         <!--right sidebar-->
-        <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0">
+        <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0 bg-gray-50"">
         {% if user.is_authenticated %}
-        {% block right_sidebar %}{% endblock right_sidebar %}
+        {% block right_sidebar %}
+             
+        {% endblock right_sidebar %}
         {% endif %}
         </div>
 

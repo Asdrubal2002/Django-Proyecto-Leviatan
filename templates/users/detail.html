@@ -8,18 +8,11 @@
 {% include 'components/navbar.html' %}
 {% endblock navbar %}
 
-<!-- left sidebar -->
-{% block left_sidebar %}
-{% include 'components/sidebars/left/sidebar.html' %}
-{% endblock left_sidebar %}
-
-
-
 {% block title %}Perfil{% endblock title %}
 
 {% block content %}
 
-<main class=' min-h-screen w-full py-5 overflow-x-hidden'>
+<main class='min-h-screen w-full py-5 overflow-x-hidden'>
   <!--banner img-->
   <div class="relative bg-gray-800 max-w-full">
     <div class="absolute inset-0">
@@ -194,21 +187,6 @@
           </nav>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <div x-show="openTab === 1">
           {% for post in posts %}
@@ -501,25 +479,13 @@
                                 </button>
                               </div>
                             </form>
-
-
                           </div>
-
-
-
                         </div>
-
                         <!-- Add more Grid-cols-3 -->
-
                       </div>
-
-
                     </div>
                   </div>
                   <!-- COMMENT POST MODAL -->
-
-
-
                 </div>
               </div>
             </div>
@@ -529,20 +495,6 @@
           <!-- END POST -->
           {% endfor %}
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <div x-show="openTab === 2">
         <div class="shadow bg-white dark:bg-dark-second dark:text-dark-txt mt-4 rounded-lg px-4 py-5">
