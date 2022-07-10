@@ -1,0 +1,55 @@
+{% extends 'users/base.html'%}
+{% load static %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
+{% block title %}Usuarios{% endblock title %}
+{% block extra_head %}{% endblock extra_head %}
+
+{% block navbar %}
+{% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+{% block left_sidebar %}
+{% include 'components/sidebars/left/sidebar.html' %}
+{% endblock left_sidebar %}
+
+{% block content %}
+<div >
+    <div class="bg-white max-w-full  shadow px-4 py-5 sm:rounded-lg sm:p-6 mt-10">
+      
+            <div class="dark:bg-dark-third max-w-full px-4 py-5 border-b rounded-lg mb-2 dark:border-dark-second border-gray-200 sm:px-6">
+
+                <h3 class="text-xl leading-6 cursor-default dark:text-dark-txt prose rounded font-bold text-gray-900">
+                    Resultados
+                </h3>
+                <p class="mt-1 text-sm cursor-default dark:text-dark-txt text-gray-500">
+                    Estos son todos los resultados que encontramos.
+                </p>
+            </div>
+            <ul class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {% for profile in profile_list %}
+                <li class="col-span-1 flex flex-col text-center dark:bg-dark-main rounded-lg shadow">
+                    <a href="{% url 'users:profile' username=profile.user.username %}">
+                        <div class="flex-1 flex-flex-col p-8">
+                            {% if profile.picture %}
+                            <img class="w-32 h-32 flex-shrink-0 mx-auto dark:bg-second bg-wgite rounded-full"
+                                src="{{profile.picture.url}}" alt="">
+                            {% else %}
+                            <img class="w-32 h-32 flex-shrink-0 mx-auto dark:bg-second bg-wgite rounded-full"
+                                src="{% static 'user_default_profile.png' %}" alt="">
+                            {% endif %}
+                            <h3 class="mt-6 dark:text-dar-txt text-gray-900 cursor-default text-lg font-bold prose">
+                                {{profile.user.username}}
+                            </h3>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+</div>
+
+
+
+{% endblock content %}

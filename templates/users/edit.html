@@ -1,0 +1,104 @@
+{% extends 'base2.html' %}
+
+{% load static %}
+
+{% load tailwind_filters %}
+
+{% block title %}Editar Perfil {{user.username}}{% endblock title %}
+
+{% block navbar %}
+{% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+
+{% block content %}
+
+<div>
+    <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+            <div class="px-4 sm:px-0">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">{{user.username}}</h3>
+                <p class="mt-1 text-sm text-gray-600">Esta información se mostrará públicamente, así que tenga cuidado con lo que comparte.</p>
+            </div>
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+            <form class="form-horizontal dark:text-dark-txt" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div>
+                            <img class="h-28 w-full bg-cover" src="{{user.profile.banner.url}}"
+                                alt="{{profile.user.username}} Banner Picture">
+                            <label class="block text-sm font-medium text-gray-700"> Banner </label>
+                            <div
+                                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                   
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="file-upload"
+                                            class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                            {{form.banner}}
+                                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                        </label>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700"> Perfil </label>
+                            <div class="mt-1 flex items-center">
+                                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 mr-4">
+                                    <img src="{{user.profile.picture.url}}" alt="">
+                                </span>
+                                {{form.picture}}
+                            </div>
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                            {{form.first_name}}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Apellido</label>
+                            {{form.last_name}}
+                        </div>
+
+                        <div>
+                            <label for="about" class="block text-sm font-medium text-gray-700"> Descripción </label>
+                            <div class="mt-1">
+                                {{form.bio}}
+                            </div>
+                            <p class="mt-2 text-sm text-gray-500">Breve descripción de tu perfil.</p>
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Ubicación</label>
+                            {{form.location}}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Fecha de nacimiento:
+                                Año-Mes-Dia</label>
+                            {{form.birthday}}
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Url de tu sitio
+                                web</label>
+                            {{form.url}}
+                        </div>
+                    </div>
+                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <button type="submit"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
