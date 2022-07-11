@@ -33,6 +33,9 @@ def UserProfileView(request, username):
             is_following = False
 
     number_of_followers = len(followers)
+    number_of_post = len(posts)
+
+    print(number_of_post)
 
     template = loader.get_template('users/detail.html')
 
@@ -43,6 +46,7 @@ def UserProfileView(request, username):
         'posts':posts,
         'share_form':share_form,
         'followers':followers,
+        'number_of_post':number_of_post,
     }
 
     return HttpResponse(template.render(context, request))
