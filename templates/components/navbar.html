@@ -46,6 +46,11 @@
     <!-- END LEFT NAV -->
 
     <!-- MAIN NAV -->
+    {% if not user.is_authenticated %}
+
+
+
+    {% else %}
     <ul x-data="{ open: false }" class="flex w-full lg:w-max items-center justify-center">
         <li class="w-1/5 md:w-max text-center">
             <a href="#" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block text-blue-500 border-b-4 border-blue-500">
@@ -78,6 +83,8 @@
                 <i class='bx bx-menu'></i>
             </button>
         </li>
+
+        
     
 
         <!--LEFT Mobile Sidebar-->
@@ -126,6 +133,7 @@
         </div>
 
     </ul>
+    {% endif %}
     <!-- END MAIN NAV -->
 
     <!-- RIGHT NAV -->

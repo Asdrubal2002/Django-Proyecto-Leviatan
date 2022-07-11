@@ -2,14 +2,16 @@
 {% if user.is_authenticated %}
 <ul class="p-4">
     <li>
-        <a href="{% url 'users:profile' user.username %}" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
+        <a href="{% url 'users:profile' user.username %}"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
             <img src="{{user.profile.picture.url}}" alt="Profile picture" class="w-10 h-10 rounded-full">
             <span class="font-semibold">{{user.username}}</span>
         </a>
     </li>
-    
+
     <li>
-        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        <a href="#"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
             <i class='bx bx-store text-gray-500'></i>
             <span class="font-semibold">Negocio</span>
         </a>
@@ -20,13 +22,15 @@
         Recomendaciones
     </p>
     <li>
-        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        <a href="#"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
             <i class='bx bx-bookmark text-gray-500'></i>
             <span class="font-semibold">Libros</span>
         </a>
     </li>
     <li>
-        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        <a href="#"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
             <i class='bx bx-directions text-gray-500'></i>
             <span class="font-semibold">Lugares</span>
         </a>
@@ -37,19 +41,21 @@
         Comunidad
     </p>
     <li>
-        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        <a href="#"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
             <i class='bx bx-group text-gray-500'></i>
             <span class="font-semibold">Preguntas</span>
         </a>
     </li>
     <li>
-        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        <a href="#"
+            class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
             <i class='bx bx-brush text-gray-500'></i>
             <span class="font-semibold">Servicios</span>
         </a>
     </li>
-    
-    
+
+
     <!-- {% comment %} 
     <li>
         <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded-lg transition-all dark:text-dark-txt dark:hover:bg-dark-third">
@@ -60,8 +66,10 @@
         </a>
     </li> 
     {% endcomment %} -->
-   
+
 </ul>
 {% else %}
+
+
 
 {% endif %}
