@@ -21,6 +21,7 @@ def UserProfileView(request, username):
     posts = SocialPost.objects.filter(author__in=[user]).order_by('-created_on')
     share_form=ShareForm()
 
+    shares = SocialPost.objects.filter(shared_user__in=[user]).order_by('-created_on')
 
     if len(followers) == 0:
         is_following = False
@@ -34,8 +35,7 @@ def UserProfileView(request, username):
 
     number_of_followers = len(followers)
     number_of_post = len(posts)
-
-    print(number_of_post)
+    number_of_postShare = len(shares)
 
     template = loader.get_template('users/detail.html')
 
@@ -47,6 +47,10 @@ def UserProfileView(request, username):
         'share_form':share_form,
         'followers':followers,
         'number_of_post':number_of_post,
+        'number_of_postShare':number_of_postShare,
+        'shares':shares,
+
+
     }
 
     return HttpResponse(template.render(context, request))
