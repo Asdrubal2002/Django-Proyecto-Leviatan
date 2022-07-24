@@ -254,7 +254,7 @@ class CommentEditView(UpdateView):
         pk = self.kwargs['post_pk']
         return reverse_lazy('social:post-detail', kwargs={'pk':pk})
 
-class UserSearch(View):
+class UserSearch(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('query')
         profile_list = Profile.objects.filter(Q(user__username__icontains=query))
