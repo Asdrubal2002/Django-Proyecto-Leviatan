@@ -42,13 +42,13 @@
         </div>
 
         <!--right sidebar-->
-        <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0 bg-gray-50"">
         {% if user.is_authenticated %}
+        <div class="w-1/5 pt-16 h-full hidden xl:block px-4 fixed top-0 right-0 bg-gray-50">
         {% block right_sidebar %}
-             
+
         {% endblock right_sidebar %}
-        {% endif %}
         </div>
+        {% endif %}
 
      </div>
 
@@ -57,10 +57,9 @@
     <!-- FOOTER -->
     <!-- <script src="{% static '/js/app.js' %}"> </script> -->
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-    
-    
-    {% block javascript %}{% endblock javascript %}
 
-
+    {% block javascript %}
+    
+    {% endblock javascript %}
 </body>
 </html>

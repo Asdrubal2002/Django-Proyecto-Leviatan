@@ -1,0 +1,24 @@
+{% load static %}
+{% if user.is_authenticated %}
+<ul class="p-4">
+   
+    <li>
+        <div 
+            class="flex items-center space-x-2 p-2  rounded-lg transition-all dark:text-dark-txt  dark:focus:bg-dark-second">
+            <i class='bx bx-broadcast'></i>
+            <span class="font-semibold">Tendencia</span>
+        </div>
+    </li>
+
+    <li class="border-b border-gray-200 dark:border-dark-third mt-6"></li>
+    <p class="flex items-center space-x-2 p-2 dark:hover:bg-dark-third dark:focus:bg-dark-second">
+        Recomendaciones
+    </p>
+  
+
+</ul>
+{% else %}
+
+
+
+{% endif %}

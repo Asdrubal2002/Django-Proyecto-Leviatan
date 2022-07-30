@@ -403,15 +403,11 @@
 </div>
 {% endblock content %}
 
-<!-- right content -->
 {% block right_sidebar %}
+{% include 'components/sidebars/right/sidebar.html' %}
 {% endblock right_sidebar %}
 
 
-<!-- FOOTER -->
-{% block footer %}
+{% block javascript %}
 
-{% endblock footer %}
-
-
-{% block javascript %}{% endblock javascript %}
+{% endblock javascript %}
