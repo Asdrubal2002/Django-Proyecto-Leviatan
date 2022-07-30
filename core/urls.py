@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('social/', include('social.urls', namespace='social')),
 
+    path('marketplace/', include('marketplace.urls', namespace="marketplace")),
+
     path('', HomeView.as_view(), name="home")
 ]
 
