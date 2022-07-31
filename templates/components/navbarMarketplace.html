@@ -54,7 +54,7 @@
     <ul x-data="{ open: false }" class="flex w-full lg:w-max items-center justify-center">
         <li class="w-1/5 md:w-max text-center">
             <a href="/" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
-                <i class='bx bxs-home'></i>
+                <i class='bx bx-home'></i>
             </a>
         </li>
         <li class="w-1/5 md:w-max text-center">
@@ -63,8 +63,8 @@
             </a>
         </li>
         <li class="w-1/5 md:w-max text-center">
-            <a href="#" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
-                <i class='bx bx-movie-play'></i>
+            <a href="{% url 'books:books' %}" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
+                <i class='bx bx-book-open'></i>
                 {% comment %} <span class="text-xs absolute top-0 right-1/4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9+</span> {% endcomment %}
             </a>
         </li>

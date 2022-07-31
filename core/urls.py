@@ -14,6 +14,8 @@ urlpatterns = [
 
     path('marketplace/', include('marketplace.urls', namespace="marketplace")),
 
+    path('books/', include('books.urls', namespace="books")),
+
     path('', HomeView.as_view(), name="home")
 ]
 

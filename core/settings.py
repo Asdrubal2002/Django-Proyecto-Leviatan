@@ -67,8 +67,9 @@ INSTALLED_APPS = [
 
     'core',
     'social',
-     'accounts',
-
+    'accounts',
+    'books',
+    'marketplace',
 
 
 ]
