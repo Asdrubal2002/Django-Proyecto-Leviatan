@@ -24,6 +24,7 @@ class Book(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     category = models.CharField(max_length=100)
+    medio = models.CharField(max_length=100)
     thumbnail = models.ImageField(blank=True, null=True, upload_to=book_directory_path)
     slug = models.SlugField(unique=True)
 

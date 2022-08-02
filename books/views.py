@@ -3,11 +3,15 @@ from django.shortcuts import render
 from django.views import View
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.views.generic.edit import UpdateView
+from django.urls import reverse
 
 from django.core.paginator import Paginator
 
 from books.models import Book
 from books.forms import BookModelForm
+
 
 # Create your views here.
 
@@ -34,14 +38,16 @@ class BooksView(View):
         books = Book.objects.filter(active=True)
 
         form=BookModelForm()
-
+    
         if request.method == "POST":
+            
             form=BookModelForm(request.POST, request.FILES)
             if form.is_valid():
                 form.user=request.user
                 name = form.cleaned_data.get('name')
                 description = form.cleaned_data.get('description')
                 category = form.cleaned_data.get('category')
+                medio = form.cleaned_data.get('medio')
                 thumbnail = form.cleaned_data.get('thumbnail')
                 slug = form.cleaned_data.get('slug')
                 content_url = form.cleaned_data.get('content_url')
@@ -49,7 +55,7 @@ class BooksView(View):
                 price = form.cleaned_data.get('price')
                 active = form.cleaned_data.get('active')
 
-                p, created = Book.objects.get_or_create(user=form.user,name=name,description=description,category=category, thumbnail=thumbnail, slug=slug, content_url=content_url, content_file=content_file,price=price, active=active)
+                p, created = Book.objects.get_or_create(user=form.user,name=name,description=description,category=category,medio=medio, thumbnail=thumbnail, slug=slug, content_url=content_url, content_file=content_file,price=price, active=active)
                 p.save()
                 return redirect('/')
 
@@ -76,4 +82,15 @@ class UserBooksListView(View):
             'books':books
         }
         return render(request, 'books/user_booklist.html', context)
+
+
+class BookUpdateView(LoginRequiredMixin, UpdateView):
+    template_name="books/edit.html"
+    form_class=BookModelForm
+
+    def get_queryset(self):
+        return Book.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        return reverse("books:book-list")
 
