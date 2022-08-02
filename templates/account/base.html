@@ -1,8 +1,9 @@
-
+{% load static %}
 {% load tailwind_tags %}
 
 <html>
   <head>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
     {% tailwind_css %}
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
