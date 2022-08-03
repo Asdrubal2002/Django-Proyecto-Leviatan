@@ -37,7 +37,7 @@ class Book(models.Model):
     content_file = models.FileField(blank=True, null=True)
     active = models.BooleanField(default=False)
     # cents Cant be lower than 50 cents@!
-    price = models.PositiveIntegerField(default=100)
+    price = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name

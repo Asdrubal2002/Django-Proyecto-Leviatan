@@ -59,10 +59,10 @@ class BookModelForm(forms.ModelForm):
     lugar = forms.CharField(widget=forms.TextInput(attrs={
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
 
-    fecha = forms.CharField(widget=forms.TextInput(attrs={ 'type':'date',
+    fecha = forms.DateField(widget=forms.DateInput(format='%YYYY:%MM:%DD', attrs={'type': 'date',
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
 
-    hora = forms.CharField(widget=forms.TextInput(attrs={ 'type':'time',
+    hora = forms.TimeField(widget=forms.TimeInput(format='%H:%M',attrs={'type': 'time',
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
 
     slug = forms.CharField(widget=forms.TextInput(attrs={
