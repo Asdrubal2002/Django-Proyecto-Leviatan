@@ -100,6 +100,18 @@
                         </div>
                     </div>
 
+                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
+                        Url
+                    </label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                        <span
+                            class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
+                            https:
+                        </span>
+                        {{form.slug}}
+                    </div>
+
+
                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
                         Nombre
                     </label>
@@ -116,39 +128,56 @@
                     {{form.category}}
 
                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Medio
+                        Manera
                     </label>
                     {{form.medio}}
 
                     <label for="photo" class=" block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Precio, Regalo = 0
+                        Precio
                     </label>
                     {{form.price}}
-
-                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Url
-                    </label>
-                    <div class="mt-1 flex rounded-md shadow-sm">
-                        <span
-                            class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
-                            https:
-                        </span>
-                        {{form.slug}}
-                    </div>
 
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center" aria-hidden="true">
                             <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
                         </div>
-                        <div class="relative flex justify-center">
-                            <span
-                                class="px-2 my-4 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
-                               ¿Como es el libro?
+                        <div class="relative flex justify-center my-4">
+                            <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
+                                Libro Fisico
                             </span>
                         </div>
                     </div>
 
-                    <label for="url" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
+                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
+                        Lugar
+                    </label>
+                    {{form.lugar}}
+
+                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700  pt-4">
+                        Fecha
+                    </label>
+                    {{form.fecha}}
+
+                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700  pt-4">
+                        Hora
+                    </label>
+                    {{form.hora}}
+
+
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                            <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center my-4">
+                            <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
+                                Libro Virtual
+                            </span>
+                        </div>
+                    </div>
+
+                    
+
+                    <label for="url" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
                         URL (Libro virtual)
                     </label>
 
@@ -221,7 +250,7 @@
             {% for book in books %}
             <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
                 <div class="flex-shrink-0">
-                    <a href="#" class="block mt-2">
+                    <a href="{% url 'books:book-detail' book.slug %}" class="block mt-2">
                         <img class="h-48 w-full object-cover" src="{{book.thumbnail.url}}" alt="">
                     </a>
                 </div>
@@ -233,7 +262,7 @@
                                 {{book.category}}
                             </a>
                         </p>
-                        <a href="#" class="block mt-2">
+                        <a href="{% url 'books:book-detail' book.slug %}" class="block mt-2">
                             <p class="text-xl font-semibold text-gray-900">
                                 {{book.name}}
                             </p>

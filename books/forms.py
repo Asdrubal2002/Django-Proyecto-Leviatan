@@ -35,10 +35,11 @@ CATEGORIES = (
 )
 
 ACCIONES = (
-    ('Vendo', 'Vendo'),
-    ('Alquilo', 'Alquilo'),
-    ('Comparto', 'Comparto'),
-    ('Regalo', 'Regalo'),
+    ('Venta', 'Venta'),
+    ('Alquilar', 'Alquilar'),
+    ('Compartir', 'Compartir'),
+    ('Regalar', 'Regalar'),
+    ('Intercambiar', 'Intercambiar'),
 )
 
 
@@ -54,18 +55,25 @@ class BookModelForm(forms.ModelForm):
     medio = forms.ChoiceField(choices=ACCIONES, widget=forms.Select(attrs={
                             'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
 
+
+    lugar = forms.CharField(widget=forms.TextInput(attrs={
+                           'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
+
+    fecha = forms.CharField(widget=forms.TextInput(attrs={ 'type':'date',
+                           'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
+
+    hora = forms.CharField(widget=forms.TextInput(attrs={ 'type':'time',
+                           'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
+
     slug = forms.CharField(widget=forms.TextInput(attrs={
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-r'}), required=True)
     price = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'
-            }),
-        required=True
-    )
+                'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
 
     content_url = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}))
+        attrs={'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
 
     class Meta:
         model = Book
@@ -74,6 +82,9 @@ class BookModelForm(forms.ModelForm):
             'description',
             'category',
             'medio',
+            'lugar',
+            'fecha',
+            'hora',
             'thumbnail',
             'slug',
             'content_url',
@@ -81,12 +92,3 @@ class BookModelForm(forms.ModelForm):
             'active',
             'price'
         )
-
-    def clean_price(self, *args, **kwargs):
-        price = self.cleaned_data.get("price")
-        price = int(price)
-        if price > 99:
-            return price
-        else:
-            raise forms.ValidationError(
-                "Price must be equal or higher than $1 == 100")

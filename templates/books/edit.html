@@ -51,84 +51,117 @@
                                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
                                         <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
                                     </div>
-                                    <div class="relative flex justify-center my-4">
-                                        <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
-                                        Product Details
-                                        </span>
-                                    </div>
-                                    </div>
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Nombres
-                                    </label>
-                                    {{form.name}}
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Descripción
-                                    </label>
-                                    {{form.description}}
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Categoria
-                                    </label>
-                                    {{form.category}}
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Medio
-                                    </label>
-                                    {{form.medio}}
-                                    
-
-                                    <label for="photo" class=" block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Precio 
-                                    </label>
-                                    {{form.price}}
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Slug
-                                    </label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                    <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
-                                        https://vudera.com/p/
-                                    </span>
-                                    {{form.slug}}
-                                    </div>
-
                                     <div class="relative">
-                                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                                        <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
-                                    </div>
-                                    <div class="relative flex justify-center">
-                                        <span class="px-2 my-4 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
-                                            ¿Como es el libro?
-                                        </span>
-                                    </div>
-                                    </div>
-
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                        URL (Libro virtual)
-                                    </label>
-                                    
-                                    {{form.content_url}}
-                                    
-                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                        Sube tu libro
-                                    </label>
-                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-
-                                    <div class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 dark:border-dark-third border-gray-300 border-dashed rounded-md">
-                                    {{form.content_file}}
-                                    <div class="space-y-1 text-center">
-                                        <div class="flex text-sm text-gray-600">
-                                        
+                                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                            <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
+                                        </div>
+                                        <div class="relative flex justify-center my-4">
+                                            <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
+                                               Detalles del libro
+                                            </span>
                                         </div>
                                     </div>
                                     </div>
 
+                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
+                                        Url
+                                    </label>
+                                    <div class="mt-1 flex rounded-md shadow-sm">
+                                        <span
+                                            class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
+                                            https:
+                                        </span>
+                                        {{form.slug}}
                                     </div>
-
+                
+                
                                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                                    Publish or Draft?
+                                        Nombre
+                                    </label>
+                                    {{form.name}}
+                
+                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Breve descripción
+                                    </label>
+                                    {{form.description}}
+                
+                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Categoria
+                                    </label>
+                                    {{form.category}}
+                
+                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Manera
+                                    </label>
+                                    {{form.medio}}
+                
+                                    <label for="photo" class=" block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Precio
+                                    </label>
+                                    {{form.price}}
+                
+                                    <div class="relative">
+                                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                            <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
+                                        </div>
+                                        <div class="relative flex justify-center my-4">
+                                            <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
+                                                Libro Fisico
+                                            </span>
+                                        </div>
+                                    </div>
+                
+                                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
+                                        Lugar
+                                    </label>
+                                    {{form.lugar}}
+                
+                                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700  pt-4">
+                                        Fecha
+                                    </label>
+                                    {{form.fecha}}
+                
+                                    <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700  pt-4">
+                                        Hora
+                                    </label>
+                                    {{form.hora}}
+                
+                
+                                    <div class="relative">
+                                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                            <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
+                                        </div>
+                                        <div class="relative flex justify-center my-4">
+                                            <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
+                                                Libro Virtual
+                                            </span>
+                                        </div>
+                                    </div>
+                
+                                    
+                
+                                    <label for="url" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
+                                        URL (Libro virtual)
+                                    </label>
+                
+                                    {{form.content_url}}
+                
+                                    <label for="booj" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Sube tu libro
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div
+                                            class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 dark:border-dark-third border-gray-300 border-dashed rounded-md">
+                                            {{form.content_file}}
+                                            <div class="space-y-1 text-center">
+                                                <div class="flex text-sm text-gray-600">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
+                                        Activar publicación
                                     </label>
                                     {{form.active}}
 

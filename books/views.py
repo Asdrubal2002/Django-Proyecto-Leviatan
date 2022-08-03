@@ -40,7 +40,7 @@ class BooksView(View):
         form=BookModelForm()
     
         if request.method == "POST":
-            
+
             form=BookModelForm(request.POST, request.FILES)
             if form.is_valid():
                 form.user=request.user
@@ -48,6 +48,9 @@ class BooksView(View):
                 description = form.cleaned_data.get('description')
                 category = form.cleaned_data.get('category')
                 medio = form.cleaned_data.get('medio')
+                lugar = form.cleaned_data.get('lugar')
+                fecha = form.cleaned_data.get('fecha')
+                hora = form.cleaned_data.get('hora')
                 thumbnail = form.cleaned_data.get('thumbnail')
                 slug = form.cleaned_data.get('slug')
                 content_url = form.cleaned_data.get('content_url')
@@ -55,7 +58,7 @@ class BooksView(View):
                 price = form.cleaned_data.get('price')
                 active = form.cleaned_data.get('active')
 
-                p, created = Book.objects.get_or_create(user=form.user,name=name,description=description,category=category,medio=medio, thumbnail=thumbnail, slug=slug, content_url=content_url, content_file=content_file,price=price, active=active)
+                p, created = Book.objects.get_or_create(user=form.user,name=name,description=description,category=category,medio=medio,lugar=lugar,fecha=fecha,hora=hora, thumbnail=thumbnail, slug=slug, content_url=content_url, content_file=content_file,price=price, active=active)
                 p.save()
                 return redirect('/')
 
@@ -93,4 +96,13 @@ class BookUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse("books:book-list")
+
+
+class BooktDetailView(View):
+    def get(self, request, slug,*args, **kwargs):
+        book = get_object_or_404(Book, slug=slug)
+        context={
+            'book':book,
+        }
+        return render(request, 'books/detail.html', context)
 

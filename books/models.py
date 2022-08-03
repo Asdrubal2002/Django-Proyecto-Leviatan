@@ -28,6 +28,10 @@ class Book(models.Model):
     thumbnail = models.ImageField(blank=True, null=True, upload_to=book_directory_path)
     slug = models.SlugField(unique=True)
 
+    lugar = models.CharField(blank=True, null=True, max_length=100)
+    fecha = models.DateField(blank=True, null=True)
+    hora = models.TimeField(blank=True, null=True)
+
     content_url = models.URLField(blank=True, null=True)
     # content_file = models.FileField(blank=True, null=True, validators=[FileExtensionValidator(allowed_extensions=['mp3'])])
     content_file = models.FileField(blank=True, null=True)
