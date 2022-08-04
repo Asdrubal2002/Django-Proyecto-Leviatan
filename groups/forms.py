@@ -3,35 +3,14 @@ from django import forms
 from .models import Group
 
 CATEGORIES = (
-    ('Libros electrónicos', 'Libros electrónicos'),
-    ('Libros interactivos', 'Libros interactivos'),
-    ('Género lírico', 'Género lírico'),
-    ('Oda', 'Oda'),
-    ('Himno', 'Himno'),
-    ('Elegía', 'Elegía'),
-    ('Égloga', 'Égloga'),
-    ('Canción', 'Canción'),
-    ('Sátira', 'Sátira'),
-    ('Epopeya', 'Epopeya'),
-    ('Poema épico', 'Poema épico'),
-    ('Romance', 'Romance'),
-    ('Fábula', 'Fábula'),
-    ('Cuento', 'Cuento'),
-    ('Leyenda', 'Leyenda'),
-    ('Novela', 'Novela'),
-    ('Tragedia', 'Tragedia'),
-    ('Comedia', 'Comedia'),
-    ('Drama', 'Drama'),
-    ('Tragicomedia', 'Tragicomedia'),
-    ('Melodrama', 'Melodrama'),
-    ('Biografías', 'Biografías'),
-    ('Libros sagrados', 'Libros sagrados'),
-    ('Libros de bolsillo', 'Libros de bolsillo'),
-    ('Cómics', 'Cómics'),
-    ('Sagas o Trilogías', 'Sagas o Trilogías'),
-    ('Libro de partituras', 'Libro de partituras'),
-    ('Historia', 'Historia'),
-    ('Terror', 'Terror'),
+    ('Turismo', 'Turismo'),
+    ('Deporte', 'Deporte'),
+    ('Estudio', 'Estudio'),
+    ('Voluntariados', 'Voluntariados'),
+    ('Musicales', 'Musicales'),
+    ('Automotriz', 'Automotriz'),
+    ('Emprendimiento', 'Emprendimiento'),
+    ('Entretenimiento', 'Entretenimiento'),
 )
 
 
@@ -61,6 +40,7 @@ class GroupModelForm(forms.ModelForm):
         model = Group
         fields = (
             'name',
+            'thumbnail',
             'description',
             'category',
             'lugar',

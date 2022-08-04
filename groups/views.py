@@ -45,6 +45,7 @@ class GroupsView(View):
                 form.user=request.user
                 slug = form.cleaned_data.get('slug')
                 name = form.cleaned_data.get('name')
+                thumbnail = form.cleaned_data.get('thumbnail')
                 description = form.cleaned_data.get('description')
                 category = form.cleaned_data.get('category')
                 lugar = form.cleaned_data.get('lugar')
@@ -52,7 +53,7 @@ class GroupsView(View):
                 numero_miembros = form.cleaned_data.get('numero_miembros')
                 active = form.cleaned_data.get('active')
 
-                p, created = Group.objects.get_or_create(user=form.user,slug=slug,name=name,description=description,category=category,lugar=lugar,urlChat=urlChat,numero_miembros=numero_miembros,active=active)
+                p, created = Group.objects.get_or_create(user=form.user,slug=slug,name=name,thumbnail=thumbnail,description=description,category=category,lugar=lugar,urlChat=urlChat,numero_miembros=numero_miembros,active=active)
                 p.save()
                 return redirect('/')
 
@@ -70,3 +71,12 @@ class GroupsView(View):
             'groups':digital_products_data
         }
         return render(request, 'groups/groups.html', context)
+
+
+class GrouptDetailView(View):
+    def get(self, request, slug,*args, **kwargs):
+        group = get_object_or_404(Group, slug=slug)
+        context={
+            'group':group,
+        }
+        return render(request, 'groups/detail.html', context)

@@ -1,7 +1,7 @@
 {% extends 'baseMarketplace.html' %}
 {% load static %}
 
-{% block title %}Libros{% endblock title %}
+{% block title %}Grupos{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
 {% block navbar %}
@@ -50,13 +50,13 @@
                     </div>
                     <div class="mt-3 text-center sm:mt-5">
                         <h3 class="text-lg leading-6 font-medium dark:text-dark-txt text-gray-900" id="modal-title">
-                           Crea una comunidad
+                            Crea una comunidad
                         </h3>
                         <div class="mt-2">
                             <p class="text-sm dark:text-dark-txt text-gray-500">
                                 ¿Cuál te gustaría vender o compartir hoy?
                             </p>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                 <form class="form-horizontal dark:text-dark-txt" method="post">
                     {% csrf_token %}
 
-                   
+
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center" aria-hidden="true">
@@ -72,8 +72,19 @@
                         </div>
                         <div class="relative flex justify-center my-4">
                             <span class="px-2 bg-white dark:bg-dark-second text-sm dark:text-dark-txt text-gray-500">
-                               Detalles del libro
+                                Detalles del libro
                             </span>
+                        </div>
+                    </div>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <div
+                            class="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 dark:border-dark-third border-gray-300 border-dashed rounded-md">
+                            {{form.thumbnail}}
+                            <div class="space-y-1 text-center">
+                                <div class="flex text-sm text-gray-600">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -90,7 +101,7 @@
 
 
                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                        Nombre
+                        Nombre del grupo
                     </label>
                     {{form.name}}
 
@@ -100,19 +111,19 @@
                     {{form.description}}
 
                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Categoria
+                        ¿Es un grupo de que?
                     </label>
                     {{form.category}}
 
 
                     <label for="lugar" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Lugar
+                        Lugar especifico donde se realizaran las actividades
                     </label>
                     {{form.lugar}}
 
-                
+
                     <label for="url" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Url de pagina 
+                        url del grupo de contacto
                     </label>
                     {{form.urlChat}}
 
@@ -121,7 +132,7 @@
                     </label>
                     {{form.numero_miembros}}
 
-                    
+
                     <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
                         Activar publicación
                     </label>
@@ -145,14 +156,23 @@
     </div>
 
     <div class="p-2 flex">
-        <a href="{% url 'books:book-list' %}"
+        <a href=""
             class="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer text-blue-500">
-            <i class='bx bx-library' ></i>
+            <i class='bx bx-library'></i>
             <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mi Grupo</span>
         </a>
-        
-       
+
+        <a href=""
+            class="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer text-green-600">
+            <i class='bx bxs-grid-alt'></i>
+            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mis postulaciones</span>
+        </a>
+
     </div>
+
+
+
+
 
 </div>
 {% endif %}
@@ -174,7 +194,7 @@
         <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
             {% for group in groups %}
             <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-              
+
                 <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                     <div class="flex-1">
                         <p class="text-sm font-medium text-blue-600">
@@ -182,7 +202,7 @@
                                 {{group.category}}
                             </a>
                         </p>
-                        <a href="#" class="block mt-2">
+                        <a href="{% url 'groups:group-detail' group.slug %}" class="block mt-2">
                             <p class="text-xl font-semibold text-gray-900">
                                 {{group.name}}
                             </p>
@@ -192,35 +212,32 @@
                             </p>
                             {% endif %}
 
-                        
+
                         </a>
                     </div>
+                    {% if user.is_authenticated %}
                     <div class="mt-6 flex items-center">
                         <div class="flex-shrink-0">
-                            <a href="#">
+                            <a href="{% url 'users:profile' username=group.user %}">
                                 <span class="sr-only">{{post.user}}</span>
-                                <img class="h-10 w-10 rounded-full"
-                                    src="{{group.user.profile.picture.url}}"
-                                    alt="">
+                                <img class="h-10 w-10 rounded-full" src="{{group.user.profile.picture.url}}" alt="">
                             </a>
                         </div>
+                        
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-900">
-                              <a href="#" class="hover:underline">
-                                {{group.user}}
-                              </a>
+                                <a href="{% url 'users:profile' username=group.user %}" class="hover:underline">
+                                    {{group.user}}
+                                </a>
                             </p>
                             <div class="flex space-x-1 text-sm text-gray-500">
-                             
-                              <!-- <span aria-hidden="true">
-                                &middot;
-                              </span>
-                              <span>
-                                6 min read
-                              </span> -->
+                                <span>
+                                    {{group.user.profile.location}}
+                                </span>
                             </div>
-                          </div>
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
