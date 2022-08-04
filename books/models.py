@@ -20,7 +20,7 @@ def book_directory_path(instance, filename):
 
 
 class Book(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books")
     name = models.CharField(max_length=100)
     description = models.TextField()
     category = models.CharField(max_length=100)
@@ -43,7 +43,7 @@ class Book(models.Model):
         return self.name
 
     def price_display(self):
-        return "{0:.2f}".format(self.price / 100)
+        return "{0:.3f}".format(self.price / 1000)
 
 
 class PurchasedBook(models.Model):

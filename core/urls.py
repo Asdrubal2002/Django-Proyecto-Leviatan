@@ -16,6 +16,8 @@ urlpatterns = [
 
     path('books/', include('books.urls', namespace="books")),
 
+    path('groups/', include('groups.urls', namespace="groups")),
+
     path('', HomeView.as_view(), name="home")
 ]
 

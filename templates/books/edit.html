@@ -26,8 +26,10 @@
                                 <form class="form-horizontal dark:text-dark-txt" method="post"  enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div>
+                                        {% if book.thumbnail %}
                                         <img class="h-28 w-full bg-cover" src="{{book.thumbnail.url}}"
                                             alt="{{profile.user.username}} Banner Picture">
+                                        {% endif %}
                                         <label class="block text-sm font-medium text-gray-700"> Portada </label>
                                         <div
                                             class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
