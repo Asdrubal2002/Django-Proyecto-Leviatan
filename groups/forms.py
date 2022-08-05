@@ -1,6 +1,6 @@
 from unicodedata import category
 from django import forms
-from .models import Group
+from .models import Group, Postulation
 
 CATEGORIES = (
     ('Turismo', 'Turismo'),
@@ -39,14 +39,27 @@ class GroupModelForm(forms.ModelForm):
     
     class Meta:
         model = Group
-        fields = (
-            'name',
-            'thumbnail',
-            'description',
-            'category',
-            'lugar',
-            'urlChat',
-            'numero_miembros',
-            'slug',
-            'active',
-        )
+        fields = ('name','thumbnail','description','category','lugar','urlChat','numero_miembros','slug','active')
+
+
+class PostulationModelForm(forms.ModelForm):
+    presentation = forms.CharField(widget=forms.Textarea(attrs={'rows':'3',
+            'class':'shadow-sm focus:ring-blue-500 dark:bg-dark-third dark:text-dark-txt focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md',
+            })
+    )
+
+    why = forms.CharField(widget=forms.Textarea(attrs={'rows':'3',
+            'class':'shadow-sm focus:ring-blue-500 dark:bg-dark-third dark:text-dark-txt focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md',
+            })
+    )
+
+    hope = forms.CharField(widget=forms.Textarea(attrs={'rows':'3',
+            'class':'shadow-sm focus:ring-blue-500 dark:bg-dark-third dark:text-dark-txt focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md',
+            })
+    )
+
+    class Meta:
+        model = Postulation
+        fields = ('presentation','why','hope')
+
+

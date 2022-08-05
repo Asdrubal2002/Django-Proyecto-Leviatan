@@ -40,13 +40,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     picture = models.ImageField(default='users/user_default_profile.png', upload_to=user_directory_path_profile)
     banner = models.ImageField(default='users/user_default_bg.jpg', upload_to=user_directory_path_banner)
-
     verified = models.CharField(max_length=10, choices=VERIFICATION_OPTIONS, default='unverified')
-
     coins = models.DecimalField(max_digits=19, decimal_places=2, default=0, blank=False)
-
     followers = models.ManyToManyField(User, blank=True, related_name="followers")
-
     date_created = models.DateField(auto_now_add=True)
 
     #User info

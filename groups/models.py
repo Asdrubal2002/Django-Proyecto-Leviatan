@@ -16,12 +16,26 @@ def group_directory_path(instance, filename):
 
 # Create your models here.
 
+GROUPS_OPTIONS=(
+    ('Turismo', 'Turismo'),
+    ('Deporte', 'Deporte'),
+    ('Estudio', 'Estudio'),
+    ('Voluntariados', 'Voluntariados'),
+    ('Arte', 'Arte'),
+    ('Cultura', 'Cultura'),
+    ('Automotriz', 'Automotriz'),
+    ('Emprendimiento', 'Emprendimiento'),
+    ('Entretenimiento', 'Entretenimiento'),
+)
+
+
+
 class Group(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="group")
     name = models.CharField(max_length=100)
     thumbnail = models.ImageField(blank=True, null=True, upload_to=group_directory_path)
     description = models.TextField()
-    category = models.CharField(blank=True, null=True, max_length=100)
+    category = models.CharField(blank=True, null=True, max_length=100, choices=GROUPS_OPTIONS)
     lugar = models.CharField(blank=True, null=True, max_length=100)
     urlChat = models.URLField(blank=True, null=True)
     numero_miembros = models.CharField(blank=False, null=False, max_length=200)
@@ -32,6 +46,18 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Postulation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="postulant")
+    group = models.ManyToManyField(Group)
+    presentation = models.TextField(max_length=300)
+    why = models.TextField(max_length=300)
+    hope = models.TextField(max_length=300)
+
+
+
+
 
 
     

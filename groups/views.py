@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 
 from groups.models import Group
-from groups.forms import GroupModelForm
+from groups.forms import GroupModelForm, PostulationModelForm
 
 
 # Create your views here.
@@ -76,8 +76,10 @@ class GroupsView(View):
 class GrouptDetailView(View):
     def get(self, request, slug,*args, **kwargs):
         group = get_object_or_404(Group, slug=slug)
+        form = PostulationModelForm()
         context={
             'group':group,
+            'form':form
         }
         return render(request, 'groups/detail.html', context)
 
