@@ -40,7 +40,7 @@ class GroupsView(View):
     
         if request.method == "POST":
 
-            form=GroupModelForm(request.POST)
+            form=GroupModelForm(request.POST, request.FILES)
             if form.is_valid():
                 form.user=request.user
                 slug = form.cleaned_data.get('slug')
@@ -80,3 +80,23 @@ class GrouptDetailView(View):
             'group':group,
         }
         return render(request, 'groups/detail.html', context)
+
+
+class UserGroupsListView(View):
+    def get(self, request, *args, **kwargs):
+        groups = Group.objects.filter(user=self.request.user)
+        context={
+            'groups':groups
+        }
+        return render(request, 'groups/user_grouplist.html', context)
+
+
+class GroupUpdateView(LoginRequiredMixin, UpdateView):
+    template_name="groups/edit.html"
+    form_class=GroupModelForm
+
+    def get_queryset(self):
+        return Group.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        return reverse("groups:group-list")

@@ -10,7 +10,7 @@
 
 
 {% block content %}
-<div class="relative px-4 sm:px-6 lg:px-8">
+<div class="relative px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-lg max-w-prose mx-auto">
         <h1>
             <span
@@ -32,13 +32,13 @@
     </div>
 
     <div class="mt-6 prose prose-blue prose-lg text-gray-500 mx-auto">
-        <p class="text-lg font-semibold text-gray-500">Solo participaran {{group.numero_miembros}} personas</p>
+        <p class="text-lg font-semibold text-gray-500">Limite de participantes {{group.numero_miembros}} personas</p>
     </div>
 
 
 
 </div>
-<!-- This example requires Tailwind CSS v2.0+ -->
+{% if user.is_authenticated %}
 <div>
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -55,6 +55,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock content %}
 
 {% block footer %}
