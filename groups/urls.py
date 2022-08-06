@@ -5,6 +5,8 @@ from .views import (
     GrouptDetailView,
     UserGroupsListView,
     GroupUpdateView,
+    MyPostulationsListView,
+    PostulationsListView,
 )
 
 app_name="groups"
@@ -20,7 +22,9 @@ urlpatterns = [
 
     path('groups/<slug>/', GrouptDetailView.as_view(), name="group-detail"),
 
+    path('my-postulations/', MyPostulationsListView.as_view(), name="my-postulations"),
 
+    path('postulations/', PostulationsListView.as_view(), name="postulations"),
 
 
 ]

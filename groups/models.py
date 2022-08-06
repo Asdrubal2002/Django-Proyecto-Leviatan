@@ -28,6 +28,11 @@ GROUPS_OPTIONS=(
     ('Entretenimiento', 'Entretenimiento'),
 )
 
+ESTATES=(
+    ('Pendiente', 'Pendiente'),
+    ('Aceptada', 'Aceptada'),
+    ('Rechazada', 'Rechazada'),
+)
 
 
 class Group(models.Model):
@@ -50,10 +55,15 @@ class Group(models.Model):
 
 class Postulation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="postulant")
-    group = models.ManyToManyField(Group)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     presentation = models.TextField(max_length=300)
     why = models.TextField(max_length=300)
     hope = models.TextField(max_length=300)
+    accepted = models.CharField(blank=False, null=False, default='Pendiente',max_length=100, choices=ESTATES)
+
+    
+
+    
 
 
 
