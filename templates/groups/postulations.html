@@ -31,27 +31,51 @@
                 <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                     <div class="flex-1">
                         <a href="#" class="block mt-2">
-                            <p class="text-xl font-semibold text-gray-900">
-                                {{postulation.group}}
+
+                            <div class="mt-6 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <a href="{% url 'users:profile' username=postulation.user %}">
+                                        <span class="sr-only">{{postulation.user}}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{postulation.user.profile.picture.url}}" alt="">
+                                    </a>
+                                </div>
+                                
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        <a href="{% url 'users:profile' username=postulation.user %}" class="hover:underline">
+                                            {{postulation.user}}
+                                        </a>
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500">
+                                        <span>
+                                            {{postulation.user.profile.location}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm font-medium text-blue-600 py-2">
+                                <a href="#" class="hover:underline">
+                                    {{postulation.group}}
+                                </a>
                             </p>
                             <p class="text-sm font-semibold text-gray-400">
-                                {{postulation.group.description}}
+                                {{postulation.presentation}}
                             </p>
                         </a>
                         <p class="text-sm font-medium text-blue-600 pt-4">
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div @click="open=false"
-                                        class="cursor-pointer mt-4 inline-flex float-left items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-red-700 dark:bg-dark-third bg-red-100 dark:hover:bg-dark-third hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-red-500">
-                                        Eliminar</div>
-                                    
-                                </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div @click="open=false"
+                                    class="cursor-pointer mt-4 inline-flex float-left items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-red-700 dark:bg-dark-third bg-red-100 dark:hover:bg-dark-third hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-red-500">
+                                    Eliminar</div>
+
                             </div>
+                        </div>
                         </p>
                     </div>
-                   
 
-                   
+
+
                 </div>
             </div>
             {% endfor %}

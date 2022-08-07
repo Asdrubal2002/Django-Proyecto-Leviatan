@@ -141,7 +141,8 @@ class MyPostulationsListView(LoginRequiredMixin, View):
 
 class PostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        postulations = Postulation.objects.all()
+        postulations = Postulation.objects.filter(group__user=self.request.user)
+
         print(postulations,"*************************************************************************")
         context={
             'postulations':postulations
