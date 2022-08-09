@@ -94,11 +94,9 @@ class GrouptDetailView(View):
                 form.user=request.user
                 group = get_object_or_404(Group, slug=slug)
                 presentation = form.cleaned_data.get('presentation')
-                why = form.cleaned_data.get('why')
-                hope = form.cleaned_data.get('hope')
                 
 
-                p, created = Postulation.objects.get_or_create(user=form.user,group=group,presentation=presentation,why=why,hope=hope)
+                p, created = Postulation.objects.get_or_create(user=form.user,group=group,presentation=presentation)
                 p.save()
                 messages.add_message(
                 self.request,

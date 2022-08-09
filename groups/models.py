@@ -39,7 +39,7 @@ class Group(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="group")
     name = models.CharField(max_length=100)
     thumbnail = models.ImageField(blank=True, null=True, upload_to=group_directory_path)
-    description = models.TextField()
+    description = models.TextField(max_length=400)
     category = models.CharField(blank=True, null=True, max_length=100, choices=GROUPS_OPTIONS)
     lugar = models.CharField(blank=True, null=True, max_length=100)
     urlChat = models.URLField(blank=True, null=True)
@@ -56,9 +56,7 @@ class Group(models.Model):
 class Postulation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="postulant")
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    presentation = models.TextField(max_length=300)
-    why = models.TextField(max_length=300)
-    hope = models.TextField(max_length=300)
+    presentation = models.TextField(max_length=400)
     accepted = models.CharField(blank=False, null=False, default='Pendiente',max_length=100, choices=ESTATES)
 
     

@@ -47,35 +47,52 @@
                                         </a>
                                     </p>
                                     <div class="flex space-x-1 text-sm text-gray-500">
+                                        {% if postulation.user.profile.location %}
                                         <span>
                                             {{postulation.user.profile.location}}
                                         </span>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                             <p class="text-sm font-medium text-blue-600 py-2">
-                                <a href="#" class="hover:underline">
+                                <a >
                                     {{postulation.group}}
                                 </a>
                             </p>
+                            
                             <p class="text-sm font-semibold text-gray-400">
                                 {{postulation.presentation}}
                             </p>
                         </a>
                         <p class="text-sm font-medium text-blue-600 pt-4">
-                        <div class="control-group">
-                            <div class="controls">
-                                <div @click="open=false"
-                                    class="cursor-pointer mt-4 inline-flex float-left items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-red-700 dark:bg-dark-third bg-red-100 dark:hover:bg-dark-third hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-red-500">
-                                    Eliminar</div>
 
+
+
+                        <div class="border border-gray-200 dark:border-dark-third border-l-0 border-r-0 py-1">
+                            <div class="flex space-x-2 justify-center items-center">
+                    
+                                <form method="POST" action="#" class="mt-2 px-2">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{request.path}}">
+                                    <button type="submit" class=" flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
+                                        <i class='bx bxs-heart text-red-500'></i>
+                                        <p class="text-sm font-semibold">Aceptar</p>
+                                    </button> 
+                                </form>
+            
+                                <form method="POST" action="#" class="mt-2 px-2">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{request.path}}">
+                                    <button type="submit" class=" flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
+                                        <i class='bx bx-heart ' ></i>
+                                        <p class="text-sm font-semibold">Rechazar</p>
+                                    </button> 
+                                </form>
                             </div>
                         </div>
                         </p>
                     </div>
-
-
-
                 </div>
             </div>
             {% endfor %}
@@ -87,5 +104,6 @@
 
 
 {% block javascript %}
+
 
 {% endblock javascript %}
