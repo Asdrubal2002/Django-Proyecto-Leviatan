@@ -58,9 +58,7 @@
                         <p class="text-sm font-medium text-blue-600 pt-4">
                             <div class="control-group">
                                 <div class="controls">
-                                    <div @click="open=false"
-                                        class="cursor-pointer mt-4 inline-flex float-left items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-red-700 dark:bg-dark-third bg-red-100 dark:hover:bg-dark-third hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-red-500">
-                                        Eliminar</div>
+                                    <a href="{% url 'groups:postulation-delete' pk=postulation.pk%}" class="cursor-pointer mt-4 inline-flex float-left items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-red-700 dark:bg-dark-third bg-red-100 dark:hover:bg-dark-third hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-red-500">Eliminar</a>
                                     
                                 </div>
                             </div>

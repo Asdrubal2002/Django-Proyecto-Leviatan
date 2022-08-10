@@ -55,7 +55,7 @@ class Group(models.Model):
 
 class Postulation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="postulant")
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey('Group', on_delete=models.CASCADE)
     presentation = models.TextField(max_length=400)
     accepted = models.CharField(blank=False, null=False, default='Pendiente',max_length=100, choices=ESTATES)
 

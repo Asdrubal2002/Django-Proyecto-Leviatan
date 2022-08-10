@@ -1,3 +1,4 @@
+from tkinter import W
 from tokenize import group
 from unicodedata import category
 from django.shortcuts import render
@@ -14,6 +15,9 @@ from django.core.paginator import Paginator
 
 from groups.models import Group, Postulation
 from groups.forms import GroupModelForm, PostulationModelForm
+
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls.base import reverse_lazy
 
 
 # Create your views here.
@@ -58,7 +62,7 @@ class GroupsView(View):
 
                 p, created = Group.objects.get_or_create(user=form.user,slug=slug,name=name,thumbnail=thumbnail,description=description,category=category,lugar=lugar,urlChat=urlChat,numero_miembros=numero_miembros,active=active)
                 p.save()
-                return redirect('/')
+                return redirect("groups:group-list")
 
 
 
@@ -141,8 +145,52 @@ class PostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         postulations = Postulation.objects.filter(group__user=self.request.user)
 
-        print(postulations,"*************************************************************************")
         context={
             'postulations':postulations
         }
         return render(request, 'groups/postulations.html', context)
+
+
+class GroupDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model=Group
+    template_name='groups/delete.html'
+    success_url = reverse_lazy("groups:group-list")
+    
+    def test_func(self):
+        group = self.get_object()
+        return self.request.user == group.user
+
+    
+class PostulationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model=Postulation
+    template_name='groups/deletePostulation.html'
+    success_url = reverse_lazy("groups:my-postulations")
+    
+    def test_func(self):
+        postulation = self.get_object()
+        return self.request.user == postulation.user
+
+
+class AddMember(LoginRequiredMixin, View):
+    def post(self, request, postulation_pk, pk, *args, **kwargs):
+        postulation = Postulation.objects.get(pk=postulation_pk)
+        group = Group.objects.get(pk=pk)
+
+        #group.members.add(postulation.user)
+
+        print(postulation.accepted)
+
+        return redirect("groups:postulations")
+
+
+class GrouptMembersView(LoginRequiredMixin, View):
+    def get(self, request, slug,*args, **kwargs):
+        group = get_object_or_404(Group, slug=slug)
+        members = group.members.all()
+        context={
+            'members':members,
+            'group':group,
+        }
+        return render(request, 'groups/members.html', context)
+        
+        
