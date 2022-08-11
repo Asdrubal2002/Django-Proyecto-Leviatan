@@ -80,7 +80,7 @@
                                     </button> 
                                 </form>
             
-                                <form method="POST" action="#" class="mt-2 px-2">
+                                <form method="POST" action="{% url 'groups:decline-member' postulation.pk postulation.group.pk %}" class="mt-2 px-2">
                                     {% csrf_token %}
                                     <input type="hidden" name="next" value="{{request.path}}">
                                     <button type="submit" class=" flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">

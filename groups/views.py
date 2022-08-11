@@ -19,6 +19,8 @@ from groups.forms import GroupModelForm, PostulationModelForm
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls.base import reverse_lazy
 
+from accounts.models import Profile
+
 
 # Create your views here.
 
@@ -144,6 +146,7 @@ class MyPostulationsListView(LoginRequiredMixin, View):
 class PostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         postulations = Postulation.objects.filter(group__user=self.request.user)
+        postulations = Postulation.objects.filter(accepted='Pendiente')
 
         context={
             'postulations':postulations
@@ -175,11 +178,18 @@ class AddMember(LoginRequiredMixin, View):
     def post(self, request, postulation_pk, pk, *args, **kwargs):
         postulation = Postulation.objects.get(pk=postulation_pk)
         group = Group.objects.get(pk=pk)
+        postulation.accepted = 'Aceptada'
+        postulation.save()
+        group.members.add(postulation.user)
+        return redirect("groups:postulations")
 
-        #group.members.add(postulation.user)
 
-        print(postulation.accepted)
-
+class DeclineMember(LoginRequiredMixin, View):
+    def post(self, request, postulation_pk, pk, *args, **kwargs):
+        postulation = Postulation.objects.get(pk=postulation_pk)
+        #group = Group.objects.get(pk=pk)
+        postulation.accepted = 'Rechazada'
+        postulation.save()
         return redirect("groups:postulations")
 
 
@@ -193,4 +203,11 @@ class GrouptMembersView(LoginRequiredMixin, View):
         }
         return render(request, 'groups/members.html', context)
         
+
+class RemoveeMember(LoginRequiredMixin, View):
+    def post(self, request, member_pk, pk, *args, **kwargs):
+        member = Profile.objects.get(pk=member_pk)
+        group = Group.objects.get(pk=pk)
+        group.members.remove(member.user)
+        return redirect("groups:members", slug=group.slug)
         

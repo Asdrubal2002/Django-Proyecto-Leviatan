@@ -35,7 +35,17 @@
                             </h3>
                         </div>
                     </a>
+                    <div class="flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl py-2 rounded-lg cursor-pointer text-gray-500 dark:text-dark-txt">
+                        <form method="POST" action="{% url 'groups:remove-member' member.pk group.pk %}">
+                            {% csrf_token %}
+                            <button type="submit">
+                                <i class='bx bxs-trash-alt'></i>
+                            </button> 
+                        </form>
+                    </div>
+                    
                 </li>
+
                 {% endfor %}
             </ul>
     </div>
