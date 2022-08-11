@@ -4,6 +4,10 @@
 {% block title %}Grupos{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
+{% load humanize %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
 {% block navbar %}
 {% include 'components/navbarGroups.html' %}
 {% endblock navbar %}
@@ -200,6 +204,7 @@
                                 {{group.category}}
                             </a>
                         </p>
+                        <span class="text-sm text-gray-500">{{group.created_on|naturaltime}}</span>
                         <a href="{% url 'groups:group-detail' group.slug %}" class="block mt-2">
                             <p class="text-xl font-semibold text-gray-900">
                                 {{group.name}}

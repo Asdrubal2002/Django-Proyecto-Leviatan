@@ -4,6 +4,10 @@
 {% block title %}Grupos{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
+{% load humanize %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
 {% block navbar %}
 {% include 'components/navbarGroups.html' %}
 {% endblock navbar %}
@@ -47,10 +51,12 @@
                                 {% endif %}
                             </div>
                         </p>
+                       
                         <a href="{% url 'groups:group-detail' postulation.group.slug %}" class="block mt-2">
                             <p class="text-xl font-semibold text-gray-900">
                                 {{postulation.group}}
                             </p>
+                            <span class="text-sm text-gray-500">{{postulation.created_on|naturaltime}}</span>
                             <p class="text-sm font-semibold text-gray-400">
                                 {{postulation.group.description}}
                             </p>

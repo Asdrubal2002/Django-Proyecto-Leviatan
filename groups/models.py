@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import os
+from django.utils import timezone
 
 User = settings.AUTH_USER_MODEL
 
@@ -44,7 +45,7 @@ class Group(models.Model):
     lugar = models.CharField(blank=True, null=True, max_length=100)
     urlChat = models.URLField(blank=True, null=True)
     numero_miembros = models.CharField(blank=False, null=False, max_length=200)
-    date_created = models.DateField(auto_now_add=True)
+    created_on = models.DateTimeField(default=timezone.now)
     members = models.ManyToManyField(User, blank=True, related_name="members")
     slug = models.SlugField(unique=True)
     active = models.BooleanField(default=False)
@@ -57,6 +58,7 @@ class Postulation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="postulant")
     group = models.ForeignKey('Group', on_delete=models.CASCADE)
     presentation = models.TextField(max_length=400)
+    created_on = models.DateTimeField(default=timezone.now)
     accepted = models.CharField(blank=False, null=False, default='Pendiente',max_length=100, choices=ESTATES)
 
     

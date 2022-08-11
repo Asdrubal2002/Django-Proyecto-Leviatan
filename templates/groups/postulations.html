@@ -4,6 +4,11 @@
 {% block title %}Grupos{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
+
+{% load humanize %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
 {% block navbar %}
 {% include 'components/navbarGroups.html' %}
 {% endblock navbar %}
@@ -46,15 +51,10 @@
                                             {{postulation.user}}
                                         </a>
                                     </p>
-                                    <div class="flex space-x-1 text-sm text-gray-500">
-                                        {% if postulation.user.profile.location %}
-                                        <span>
-                                            {{postulation.user.profile.location}}
-                                        </span>
-                                        {% endif %}
-                                    </div>
+                                    <span class="text-sm text-gray-500">{{postulation.created_on|naturaltime}}</span>
                                 </div>
                             </div>
+                          
                             <p class="text-sm font-medium text-blue-600 py-2">
                                 <a >
                                     {{postulation.group}}
