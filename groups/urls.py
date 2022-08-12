@@ -13,6 +13,8 @@ from .views import (
     GrouptMembersView,
     DeclineMember,
     RemoveeMember,
+    MyGroupsListView,
+    LeaveGroup,
 )
 
 app_name="groups"
@@ -45,5 +47,10 @@ urlpatterns = [
     path('declinepostulation/<int:postulation_pk>/group/<int:pk>/reply',DeclineMember.as_view(), name='decline-member'),
 
     path('members/<slug>/', GrouptMembersView.as_view(), name="members"),
+
+    path('my-groups/', MyGroupsListView.as_view(), name="my-groups"),
+
+    path('leavegroup/delete/<int:pk>', LeaveGroup.as_view(), name="leave-group"),
+
 
 ]

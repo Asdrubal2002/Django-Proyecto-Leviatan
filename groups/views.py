@@ -1,3 +1,4 @@
+from pickle import FALSE
 from tkinter import W
 from tokenize import group
 from unicodedata import category
@@ -20,6 +21,9 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.urls.base import reverse_lazy
 
 from accounts.models import Profile
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # Create your views here.
@@ -145,9 +149,8 @@ class MyPostulationsListView(LoginRequiredMixin, View):
 
 class PostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        postulations = Postulation.objects.filter(group__user=self.request.user)
-        postulations = Postulation.objects.filter(accepted='Pendiente')
-
+        postulations = Postulation.objects.filter(group__user=self.request.user, accepted='Pendiente')
+        
         context={
             'postulations':postulations
         }
@@ -178,9 +181,26 @@ class AddMember(LoginRequiredMixin, View):
     def post(self, request, postulation_pk, pk, *args, **kwargs):
         postulation = Postulation.objects.get(pk=postulation_pk)
         group = Group.objects.get(pk=pk)
-        postulation.accepted = 'Aceptada'
-        postulation.save()
-        group.members.add(postulation.user)
+        members = group.members.all()
+        number_of_members = len(members)
+        if number_of_members < int(group.numero_miembros):
+           postulation.accepted = 'Aceptada'
+           postulation.save()
+           group.members.add(postulation.user)
+        else:
+            messages.add_message(
+            self.request,
+            messages.WARNING,
+            'Ya no puedes ingresar mas personas, si quieres cambia la cantidad de personas'
+            )
+
+        members = group.members.all()
+        number_of_members = len(members)
+        if number_of_members == int(group.numero_miembros):
+            group.active = False
+            group.save()
+
+
         return redirect("groups:postulations")
 
 
@@ -211,3 +231,21 @@ class RemoveeMember(LoginRequiredMixin, View):
         group.members.remove(member.user)
         return redirect("groups:members", slug=group.slug)
         
+
+class MyGroupsListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        groups = Group.objects.filter(members=self.request.user)
+        print(groups)
+        context={
+            'groups':groups
+        }
+        return render(request, 'groups/my_groups.html', context)
+
+
+class LeaveGroup(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        group = Group.objects.get(pk=pk)
+        user = request.user.id
+        member = Profile.objects.get(pk=user)
+        group.members.remove(member.user)
+        return redirect("groups:my-groups")
