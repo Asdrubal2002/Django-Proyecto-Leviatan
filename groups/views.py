@@ -70,7 +70,7 @@ class GroupsView(View):
                 p.save()
                 return redirect("groups:group-list")
 
-
+           
         digital_products_data = None
 
         if groups:
@@ -79,7 +79,8 @@ class GroupsView(View):
             digital_products_data = paginator.get_page(page_number)
         
         context={
-            'groups':digital_products_data
+            'groups':digital_products_data,
+            'form':form
         }
         return render(request, 'groups/groups.html', context)
 
