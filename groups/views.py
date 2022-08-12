@@ -71,8 +71,6 @@ class GroupsView(View):
                 return redirect("groups:group-list")
 
 
-
-
         digital_products_data = None
 
         if groups:
@@ -141,8 +139,16 @@ class GroupUpdateView(LoginRequiredMixin, UpdateView):
 class MyPostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         postulations = Postulation.objects.filter(user=self.request.user)
+
+        postulations_data = None
+
+        if postulations:
+            paginator = Paginator(postulations, 3)
+            page_number = request.GET.get('page')
+            postulations_data = paginator.get_page(page_number)
+
         context={
-            'postulations':postulations
+            'postulations':postulations_data
         }
         return render(request, 'groups/my_postulations.html', context)
 
@@ -150,10 +156,18 @@ class MyPostulationsListView(LoginRequiredMixin, View):
 class PostulationsListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         postulations = Postulation.objects.filter(group__user=self.request.user, accepted='Pendiente')
+
+        postulations_data = None
+
+        if postulations:
+            paginator = Paginator(postulations, 6)
+            page_number = request.GET.get('page')
+            postulations_data = paginator.get_page(page_number)
         
         context={
-            'postulations':postulations
+            'postulations':postulations_data
         }
+
         return render(request, 'groups/postulations.html', context)
 
 
@@ -191,7 +205,7 @@ class AddMember(LoginRequiredMixin, View):
             messages.add_message(
             self.request,
             messages.WARNING,
-            'Ya no puedes ingresar mas personas, si quieres cambia la cantidad de personas'
+            'Ya no puedes ingresar más personas, si quieres cambia la cantidad de personas'
             )
 
         members = group.members.all()
@@ -217,8 +231,16 @@ class GrouptMembersView(LoginRequiredMixin, View):
     def get(self, request, slug,*args, **kwargs):
         group = get_object_or_404(Group, slug=slug)
         members = group.members.all()
+
+        members_data = None
+
+        if members:
+            paginator = Paginator(members, 4)
+            page_number = request.GET.get('page')
+            members_data = paginator.get_page(page_number)
+        
         context={
-            'members':members,
+            'members':members_data,
             'group':group,
         }
         return render(request, 'groups/members.html', context)

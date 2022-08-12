@@ -30,10 +30,10 @@ class GroupModelForm(forms.ModelForm):
     lugar = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Ciudad, localidad.','maxlength':'30',
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
 
-    urlChat = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'WhatsApp, Telegram, otra.',
+    urlChat = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'WhatsApp, Telegram, otra.', 'type':'url',
             'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
     
-    numero_miembros = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Ciudad, localidad.','type':'number',
+    numero_miembros = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'¿Cuantas personas quieres conocer?','type':'number',
             'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
 
     slug = forms.CharField(widget=forms.TextInput(attrs={
