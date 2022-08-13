@@ -15,6 +15,7 @@ from .views import (
     RemoveeMember,
     MyGroupsListView,
     LeaveGroup,
+    GroupSearch,
 )
 
 app_name="groups"
@@ -51,6 +52,8 @@ urlpatterns = [
     path('my-groups/', MyGroupsListView.as_view(), name="my-groups"),
 
     path('leavegroup/delete/<int:pk>', LeaveGroup.as_view(), name="leave-group"),
+
+    path('search/', GroupSearch.as_view(), name="group-search"),
 
 
 ]

@@ -32,9 +32,9 @@
                 <span class="mx-2 font-semibold dark:text-dark-txt">{{user.profile.coins}}</span>
             </a> -->
 
-            <form method="GET" action="{% url 'social:profile-search' %}" class="mt-4 relative bg-gray-100 dark:bg-dark-third px-2 py-2 w-10 h-10 sm:w-11 sm:h-11 lg:h-10 lg:w-10 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer">
+            <form method="GET" action="{% url 'groups:group-search' %}" class="mt-4 relative bg-gray-100 dark:bg-dark-third px-2 py-2 w-10 h-10 sm:w-11 sm:h-11 lg:h-10 lg:w-10 xl:w-max xl:pl-3 xl:pr-8 rounded-full flex items-center justify-center cursor-pointer">
                 <button type="submit" class='bx bx-search-alt-2 text-xl xl:mr-2 dark:text-dark-txt'></button>
-                <input name="query" value="{{ request.GET.query }}" type="text" placeholder="Buscar Usuarios" class="outline-none border-none bg-transparent hidden xl:inline-block">
+                <input name="query" value="{{ request.GET.query }}" type="text" placeholder="Buscar Servicio" class="outline-none border-none bg-transparent hidden xl:inline-block">
             </form>
 
             <div class="text-xl grid place-items-center md:hidden bg-gray-200 dark:bg-dark-third rounded-full w-10 h-10 cursor-pointer hover:bg-gray-300 dark:text-dark-txt" id="dark-mode-toggle-mb">
@@ -53,7 +53,7 @@
     {% else %}
     <ul x-data="{ open: false }" class="flex w-full lg:w-max items-center justify-center">
         <li class="w-1/5 md:w-max text-center">
-            <a href="/" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block text-blue-500 border-b-4 border-blue-500">
+            <a href="/" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
                 <i class='bx bx-home'></i>
             </a>
         </li>
@@ -63,16 +63,16 @@
             </a>
         </li>
         <li class="w-1/5 md:w-max text-center">
-            <a href="{% url 'services:services' %}" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
+            <a href="{% url 'services:services' %}" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block text-blue-500 border-b-4 border-blue-500">
                 <i class='bx bx-brush'></i>
                 {% comment %} <span class="text-xs absolute top-0 right-1/4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9+</span> {% endcomment %}
             </a>
         </li>
-       
         <li class="w-1/5 md:w-max text-center">
 
-            <a href="{% url 'groups:groups' %}" class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
+            <a href="{% url 'groups:groups' %}"  class="w-full text-3xl py-2 px-3 xl:px-12 cursor-pointer text-center inline-block rounded text-gray-600 hover:bg-gray-100 dark:hover:bg-dark-third dark:text-dark-txt relative">
                 <i class='bx bx-group'></i>
+                {% comment %} <span class="text-xs absolute top-0 right-1/4 bg-red-500 text-white font-semibold rounded-full px-1 text-center">9+</span> {% endcomment %}
             </a>
         </li>
         <!-- <li class="w-1/5 md:w-max text-center hidden md:inline-block">

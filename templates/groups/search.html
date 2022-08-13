@@ -1,0 +1,85 @@
+{% extends 'users/base.html'%}
+{% load static %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
+{% block title %}Grupos{% endblock title %}
+{% block extra_head %}{% endblock extra_head %}
+
+{% load humanize %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
+{% block navbar %}
+{% include 'components/navbarGroups.html' %}
+{% endblock navbar %}
+
+{% block left_sidebar %}
+{% include 'components/sidebars/left/sidebar.html' %}
+{% endblock left_sidebar %}
+
+{% block content %}
+<div >
+    <div class="bg-white max-w-full  shadow px-4 py-5 sm:rounded-lg sm:p-6 mt-10">
+            <div class="dark:bg-dark-third max-w-full px-4 py-5 border-b rounded-lg mb-2 dark:border-dark-second border-gray-200 sm:px-6">
+
+                <h3 class="text-xl leading-6 cursor-default dark:text-dark-txt prose rounded font-bold text-gray-900">
+                    {{number_of_groups}} Resultados 
+                </h3>
+                <p class="mt-1 text-sm cursor-default dark:text-dark-txt text-gray-500">
+                    Estos son todos los resultados que encontramos.
+                </p>
+            </div>
+            <ul class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {% for group in group_list %}
+                <div class="flex-1 bg-white p-6 flex flex-col justify-between border rounded-lg mb-2 dark:border-dark-second border-gray-200 sm:px-6">
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-blue-600">
+                            <a>
+                                {{group.category}}
+                            </a>
+                        </p>
+                        <span class="text-sm text-gray-500">{{group.created_on|naturaltime}}</span>
+                        <a href="{% url 'groups:group-detail' group.slug %}" class="block mt-2">
+                            <p class="text-xl font-semibold text-gray-900">
+                                {{group.name}}
+                            </p>
+                            {% if group.lugar %}
+                            <p class="text-base font-semibold text-gray-400">
+                                {{group.lugar}}
+                            </p>
+                            {% endif %}
+                        </a>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <a href="{% url 'users:profile' username=group.user %}">
+                                <span class="sr-only">{{post.user}}</span>
+                                <img class="h-10 w-10 rounded-full" src="{{group.user.profile.picture.url}}" alt="">
+                            </a>
+                        </div>
+                        
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">
+                                <a href="{% url 'users:profile' username=group.user %}" class="hover:underline">
+                                    {{group.user}}
+                                </a>
+                            </p>
+                            <div class="flex space-x-1 text-sm text-gray-500">
+                                <span>
+                                    {{group.user.profile.location}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </ul>
+    </div>
+</div>
+
+
+
+{% endblock content %}

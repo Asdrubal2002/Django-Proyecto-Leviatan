@@ -25,6 +25,8 @@ from accounts.models import Profile
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -272,3 +274,16 @@ class LeaveGroup(LoginRequiredMixin, View):
         member = Profile.objects.get(pk=user)
         group.members.remove(member.user)
         return redirect("groups:my-groups")
+
+
+class GroupSearch(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        group_list = Group.objects.filter(Q(name__icontains=query, active=True))
+        number_of_groups = len(group_list)
+        print(number_of_groups, '*************************')
+        context={
+            'number_of_groups':number_of_groups,
+            'group_list':group_list
+        }
+        return render(request, 'groups/search.html', context)

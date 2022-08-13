@@ -18,6 +18,8 @@ urlpatterns = [
 
     path('groups/', include('groups.urls', namespace="groups")),
 
+    path('services/', include('services.urls', namespace="services")),
+
     path('', HomeView.as_view(), name="home")
 ]
 

@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'books',
     'marketplace',
     'groups',
+    'services',
 
 
 ]

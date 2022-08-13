@@ -1,7 +1,7 @@
 {% extends 'baseMarketplace.html' %}
 {% load static %}
 
-{% block title %}Grupos{% endblock title %}
+{% block title %}Servicios{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
 {% load humanize %}
@@ -9,7 +9,7 @@
 {% load tailwind_filters %}
 
 {% block navbar %}
-{% include 'components/navbarGroups.html' %}
+{% include 'components/navbarServices.html' %}
 {% endblock navbar %}
 
 
@@ -17,17 +17,17 @@
 {% if user.is_authenticated %}
 <div x-data="{ open: false }" class="px-4 mt-4 shadow rounded-lg bg-white dark:bg-dark-second">
 
-    <div class="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4">
+    <!-- <div class="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4">
         <a href="{% url 'users:profile' username=user.username %}">
             <img src="{{user.profile.picture.url}}" alt="Profile picture" class="w-10 h-10 rounded-full">
         </a>
         <button @click="open = true" type="button"
             class="transition duration-500 ease-in-out transform hover:-translate-y-1 flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt">
             <span>
-                ¿{{user.username}} quieres crear una comunidad?
+                ¿{{user.username}} tienes alguna habilidad o trabajo?
             </span>
         </button>
-    </div>
+    </div> -->
 
     <!--POST MODAL-->
     <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
@@ -161,20 +161,20 @@
     </div>
 
     <div class="p-2 flex">
-        <a href="{% url 'groups:group-list' %}"
+        <a href="{% url 'services:company' %}"
             class="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer text-blue-500">
-            <i class='bx bxs-shapes'></i>
-            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mis Grupos</span>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mi empresa</span>
         </a>
-        <a href="{% url 'groups:my-postulations' %}"
+        <a href="#"
             class="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer text-green-600">
-            <i class='bx bxs-grid-alt'></i>
-            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mis postulaciones</span>
+            <i class='bx bx-run'></i>
+            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">Mis trabajos</span>
         </a>
-        <a href="{% url 'groups:postulations' %}"
+        <a href="#"
             class="w-1/3 flex space-x-2 justify-center items-center hover:bg-gray-100 dark:hover:bg-dark-third text-xl sm:text-3xl py-2 rounded-lg cursor-pointer text-yellow-500">
-            <i class='bx bxs-cube-alt'></i>
-            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">postulaciones</span>
+            <i class='bx bx-paint-roll'></i>
+            <span class="text-xs sm:text-sm font-semibold text-gray-500 dark:text-dark-txt">trabajos</span>
         </a>
     </div>
 </div>
@@ -187,11 +187,11 @@
     <div class="relative max-w-7xl mx-auto">
         <div class="text-center">
             <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
-                Grupos
+                Servicios
             </h2>
-            <!-- <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+            <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
                 Comunidades que se caracterizan contigo
-            </p> -->
+            </p>
         </div>
 
         <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
