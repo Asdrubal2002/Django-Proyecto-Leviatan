@@ -66,9 +66,8 @@ class GroupsView(View):
                 lugar = form.cleaned_data.get('lugar')
                 urlChat = form.cleaned_data.get('urlChat')
                 numero_miembros = form.cleaned_data.get('numero_miembros')
-                active = form.cleaned_data.get('active')
 
-                p, created = Group.objects.get_or_create(user=form.user,slug=slug,name=name,thumbnail=thumbnail,description=description,category=category,lugar=lugar,urlChat=urlChat,numero_miembros=numero_miembros,active=active)
+                p, created = Group.objects.get_or_create(user=form.user,slug=slug,name=name,thumbnail=thumbnail,description=description,category=category,lugar=lugar,urlChat=urlChat,numero_miembros=numero_miembros)
                 p.save()
                 return redirect("groups:group-list")
 
@@ -281,7 +280,6 @@ class GroupSearch(LoginRequiredMixin, View):
         query = self.request.GET.get('query')
         group_list = Group.objects.filter(Q(name__icontains=query, active=True))
         number_of_groups = len(group_list)
-        print(number_of_groups, '*************************')
         context={
             'number_of_groups':number_of_groups,
             'group_list':group_list

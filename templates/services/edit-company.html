@@ -22,12 +22,13 @@
                 {% csrf_token %}
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                        <div>
+                         <div>
+                            <img class="h-28 w-full bg-cover" src="{{empresa.banner.url}}"
+                                alt="{{company.banner.url}} Banner Picture">
                             <label class="block text-sm font-medium text-gray-700"> Banner </label>
                             <div
                                 class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                 <div class="space-y-1 text-center">
-                                   
                                     <div class="flex text-sm text-gray-600">
                                         <label for="file-upload"
                                             class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
@@ -39,10 +40,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-medium text-gray-700"> Logo </label>
+                            <label class="block text-sm font-medium text-gray-700"> Perfil </label>
                             <div class="mt-1 flex items-center">
+                                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 mr-4">
+                                    <img src="{{empresa.picture.url}}" alt="">
+                                </span>
                                 {{form.picture}}
                             </div>
                         </div>
@@ -93,7 +96,7 @@
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                         <button type="submit"
-                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Crear Empresa</button>
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Editar Empresa</button>
                     </div>
                 </div>
             </form>
