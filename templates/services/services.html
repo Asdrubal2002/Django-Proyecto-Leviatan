@@ -84,7 +84,7 @@
                     </div>
                     <div class="mt-6 flex items-center">
                         <div class="flex-shrink-0">
-                            <a href="{% url 'services:company-detail' service.company %}">
+                            <a href="{% url 'services:company-detail' service.company.slug %}">
                                 <img class="h-10 w-10 rounded-full"
                                     src="{{service.company.picture.url}}"
                                     alt="">
@@ -100,12 +100,6 @@
                               <time datetime="2020-03-16">
                                 {{service.created_on|naturaltime}}
                               </time>
-                              <!-- <span aria-hidden="true">
-                                &middot;
-                              </span>
-                              <span>
-                                6 min read
-                              </span> -->
                             </div>
                           </div>
                     </div>

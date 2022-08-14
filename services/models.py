@@ -86,7 +86,7 @@ class Work(models.Model):
     name = models.CharField(max_length=100)
     presentation = models.TextField(max_length=400)
     created_on = models.DateTimeField(default=timezone.now)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
     price = models.PositiveIntegerField(blank=True, null=True)
 

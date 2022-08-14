@@ -111,6 +111,9 @@
                         <p class="mt-2 max-w-4xl text-sm mx-1 text-gray-500 cursor-default">
                             <i class='bx bxs-like'></i> {{number_of_likes}} les gusta esta empresa
                         </p>
+                        <p class="mt-2 max-w-4xl text-sm mx-1 text-gray-500 cursor-default">
+                            <i class='bx bx-hourglass' ></i> {{company.schedule}} 
+                        </p>
 
                     </div>
                     <div class="mt-6 flex items-center">
@@ -128,15 +131,9 @@
                               </a>
                             </p>
                             <div class="flex space-x-1 text-sm text-gray-500">
-                              <time datetime="2020-03-16">
+                              <time datetime="Propietari@">
                                Es propietari@ de esta empresa
                               </time>
-                              <!-- <span aria-hidden="true">
-                                &middot;
-                              </span>
-                              <span>
-                                6 min read
-                              </span> -->
                             </div>
                           </div>
                     </div>
@@ -149,19 +146,7 @@
     <div x-data="{ open: false }"
         class="mt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  shadow rounded-lg bg-white dark:bg-dark-second">
         
-        {% if user.is_authenticated and user != company.user %}
-        <div class="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4">
-            <a href="{% url 'users:profile' username=user.username %}">
-                <img src="{{user.profile.picture.url}}" alt="Profile picture" class="w-10 h-10 rounded-full">
-            </a>
-            <button @click="open = true" type="button"
-                class="transition duration-500 ease-in-out transform hover:-translate-y-1 flex-1 bg-gray-100 rounded-full flex items-center justify-start pl-4 cursor-pointer dark:bg-dark-third text-gray-500 text-lg dark:text-dark-txt">
-                <span>
-                    ¿{{user.username}} tienes alguna trabajo que quieras personalizado?
-                </span>
-            </button>
-        </div>
-        {% else %}
+        {% if user.is_authenticated and user == company.user %}
         <div class="p-2 border-b border-gray-300 dark:border-dark-third flex space-x-4">
             <a href="{% url 'users:profile' username=user.username %}">
                 <img src="{{user.profile.picture.url}}" alt="Profile picture" class="w-10 h-10 rounded-full">
@@ -173,7 +158,6 @@
                 </span>
             </button>
         </div>
-
         {%  endif %}
 
         
@@ -231,7 +215,7 @@
                         <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
                             Nombre
                         </label>
-                        {{form.nombre}}
+                        {{form.name}}
 
                         <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
                             Breve presentación
@@ -243,11 +227,6 @@
                             Precio de este trabajo
                         </label>
                         {{form.price}}
-
-                        <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                            Activar publicación
-                        </label>
-                        {{form.active}}
 
                         <div class="pt-4">
                             <span class="text-red-500 font-mono">{{form.errors}}</span>
