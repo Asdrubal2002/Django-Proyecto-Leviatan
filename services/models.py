@@ -42,14 +42,16 @@ def work_directory_path(instance, filename):
 
 GROUPS_OPTIONS=(
     ('Turismo', 'Turismo'),
-    ('Deporte', 'Deporte'),
-    ('Estudio', 'Estudio'),
-    ('Voluntariados', 'Voluntariados'),
-    ('Arte', 'Arte'),
-    ('Cultura', 'Cultura'),
+    ('Educacion', 'Educación'),
+    ('Tecnologia', 'Tecnologia'),
+    ('Aseo', 'Aseo'),
+    ('Moda', 'Moda'),
+    ('Artesania', 'Artesania'),
     ('Automotriz', 'Automotriz'),
-    ('Emprendimiento', 'Emprendimiento'),
+    ('Gastronomia', 'Gastronomía'),
     ('Entretenimiento', 'Entretenimiento'),
+    ('Inmobiliaria', 'Inmobiliaria'),
+    ('Seguridad', 'Seguridad'),
 )
 
 VERIFICATION_OPTIONS=(

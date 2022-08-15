@@ -48,7 +48,7 @@ class Group(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     members = models.ManyToManyField(User, blank=True, related_name="members")
     slug = models.SlugField(unique=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

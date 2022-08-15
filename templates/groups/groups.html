@@ -89,19 +89,7 @@
                         </div>
                     </div>
 
-                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
-                        Url
-                    </label>
-                    <div class="mt-1 flex rounded-md shadow-sm">
-                        <span
-                            class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
-                            https:
-                        </span>
-                        {{form.slug}}
-                    </div>
-
-
-                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
+                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
                         Nombre del grupo
                     </label>
                     {{form.name}}
@@ -132,12 +120,6 @@
                         Numero de miembros que quires en tu grupo
                     </label>
                     {{form.numero_miembros}}
-
-
-                    <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                        Activar publicación
-                    </label>
-                    {{form.active}}
 
                     <div class="pt-4">
                         <span class="text-red-500 font-mono">{{form.errors}}</span>

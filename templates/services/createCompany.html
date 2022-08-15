@@ -4,7 +4,7 @@
 
 {% load tailwind_filters %}
 
-{% block title %}Editar Perfil {{user.username}}{% endblock title %}
+{% block title %}Crear empresa{% endblock title %}
 
 {% block navbar %}
 {% include 'components/navbarServices.html' %}
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Categoria</label>
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Categoría</label>
                             {{form.category}}
                         </div>
 
@@ -81,13 +81,17 @@
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Numero Teléfonico</label>
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">Número Telefónico</label>
                             {{form.number}}
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="first-name" class="block text-sm font-medium text-gray-700">Url chat</label>
                             {{form.urlChat}}
+                        </div>
+
+                        <div class="pt-4">
+                            <span class="text-red-500 font-mono">{{form.errors}}</span>
                         </div>
 
                     </div>

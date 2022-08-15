@@ -10,7 +10,8 @@ from services.models import Empresa, Work
 from services.forms import EmpresaModelForm, TrabajoModelForm
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
+from django.urls.base import reverse_lazy
 from django.urls import reverse
 
 from django.contrib import messages
@@ -27,22 +28,22 @@ def random_string_generator(size=10, chars=string.ascii_lowercase + string.digit
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-def unique_slug_generator(instance, new_slug=None):
-    if new_slug is not None:
-        slug = new_slug
-    else:
-        slug = slugify(instance.nombre)
-        Klass = instance.__class__
-        max_length = Klass._meta.get_field('slug').max_length
-        slug = slug[:max_length]
-        qs_exists = Klass.objects.filter(slug=slug).exists()
+# def unique_slug_generator(instance, new_slug=None):
+#     if new_slug is not None:
+#         slug = new_slug
+#     else:
+#         slug = slugify(instance.nombre)
+#         Klass = instance.__class__
+#         max_length = Klass._meta.get_field('slug').max_length
+#         slug = slug[:max_length]
+#         qs_exists = Klass.objects.filter(slug=slug).exists()
 
-        if qs_exists:
-            new_slug = "{slug}-{randstr}".format(
-                slug=slug[:max_length-5], randstr=random_string_generator(size=4))
+#         if qs_exists:
+#             new_slug = "{slug}-{randstr}".format(
+#                 slug=slug[:max_length-5], randstr=random_string_generator(size=4))
 
-            return unique_slug_generator(instance, new_slug=new_slug)
-        return slug
+#             return unique_slug_generator(instance, new_slug=new_slug)
+#         return slug
 
 
 class ServicesView(View):
@@ -129,6 +130,11 @@ class EmpresaDetailView(LoginRequiredMixin, View):
                 'number_of_likes': number_of_likes,
                 'form': form
             }
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                form.errors
+            )
             return render(request, 'services/my-company.html', context)
 
 
@@ -151,13 +157,9 @@ class CreateCompanyView(View):
         return render(request, 'services/createCompany.html', context)
 
     def post(self, request, *args, **kwargs):
-
         key = random_string_generator()
-
         form = EmpresaModelForm()
-
         if request.method == "POST":
-
             form = EmpresaModelForm(request.POST, request.FILES)
             if form.is_valid():
                 form.user = request.user
@@ -176,6 +178,11 @@ class CreateCompanyView(View):
                 p, created = Empresa.objects.get_or_create(user=form.user, banner=banner, picture=picture, nombre=nombre, description=description,
                                                            category=category, lugar=lugar, urlChat=urlChat, schedule=schedule, direction=direction, number=number, slug=slug)
                 p.save()
+                messages.add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    'Se ha creado con exito su empresa, ya puedes compartir tu trabajo'
+                )
                 return redirect("services:company-detail", slug=slug)
 
         context = {
@@ -192,4 +199,44 @@ class CompanyUpdateView(LoginRequiredMixin, UpdateView):
         return Empresa.objects.filter(user=self.request.user)
 
     def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Se ha actualizado su empresa'
+        )
         return reverse("services:services")
+
+
+class ServiceUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "services/edit-service.html"
+    form_class = TrabajoModelForm
+
+    def get_queryset(self):
+        return Work.objects.filter(company__user=self.request.user)
+
+    def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Se ha actualizado correctamente'
+        )
+        return reverse("services:services")
+
+
+class ServiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model=Work
+    template_name='services/delete-service.html'
+    
+    def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Haz eliminado el trabajo correctamente'
+        )
+        return reverse_lazy("services:services")
+    
+    def test_func(self):
+        
+        work = self.get_object()
+        return self.request.user == work.company.user
+        

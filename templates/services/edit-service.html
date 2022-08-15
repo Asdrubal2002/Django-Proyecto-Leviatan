@@ -4,7 +4,7 @@
 
 {% load tailwind_filters %}
 
-{% block title %}Editar Empresa{% endblock title %}
+{% block title %}Editar Perfil {{user.username}}{% endblock title %}
 
 {% block navbar %}
 {% include 'components/navbarServices.html' %}
@@ -23,16 +23,18 @@
                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                          <div>
-                            <img class="h-28 w-full bg-cover" src="{{empresa.banner.url}}"
-                                alt="{{company.banner.url}} Banner Picture">
+                            {% if work.thumbnail %}
+                            <img class="h-28 w-full bg-cover" src="{{work.thumbnail.url}}"
+                                alt="{{service.thumbnail.url}} Banner Picture">
                             <label class="block text-sm font-medium text-gray-700"> Banner </label>
+                            {% endif %}
                             <div
                                 class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                 <div class="space-y-1 text-center">
                                     <div class="flex text-sm text-gray-600">
                                         <label for="file-upload"
                                             class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                            {{form.banner}}
+                                            {{form.thumbnail}}
                                             <input id="file-upload" name="file-upload" type="file" class="sr-only">
                                         </label>
                                     </div>
@@ -40,57 +42,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700"> Perfil </label>
-                            <div class="mt-1 flex items-center">
-                                <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100 mr-4">
-                                    <img src="{{empresa.picture.url}}" alt="">
-                                </span>
-                                {{form.picture}}
-                            </div>
-                        </div>
-
                         <div class="col-span-6 sm:col-span-3">
                             <label for="first-name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                            {{form.nombre}}
+                            {{form.name}}
                         </div>
 
                         <div>
                             <label for="about" class="block text-sm font-medium text-gray-700"> Descripción </label>
                             <div class="mt-1">
-                                {{form.description}}
+                                {{form.presentation}}
                             </div>
                             <p class="mt-2 text-sm text-gray-500">Breve descripción de tu perfil.</p>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="first-name" class="block text-sm font-medium text-gray-700">Localidad</label>
-                            {{form.lugar}}
+                            {{form.price}}
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Categoria</label>
-                            {{form.category}}
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">¿Que horario tienes?</label>
-                            {{form.schedule}}
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Dirección</label>
-                            {{form.direction}}
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Numero Teléfonico</label>
-                            {{form.number}}
-                        </div>
-
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="first-name" class="block text-sm font-medium text-gray-700">Url chat</label>
-                            {{form.urlChat}}
+                            <label for="first-name" class="text-sm font-medium text-gray-700">Activación</label>
+                        
+                            {{form.active}}
                         </div>
 
                         {% if form.errors %}
@@ -98,11 +71,12 @@
                             <span class="text-red-500 font-mono">{{form.errors}}</span>
                         </div>
                         {% endif %}
+                       
 
                     </div>
                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                         <button type="submit"
-                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Editar Empresa</button>
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Editar Trabajo</button>
                     </div>
                 </div>
             </form>

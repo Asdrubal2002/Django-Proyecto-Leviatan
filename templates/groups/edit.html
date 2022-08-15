@@ -47,19 +47,9 @@
                                     </div>
                                 </div>
             
-                                <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 ">
-                                    Url
-                                </label>
-                                <div class="mt-1 flex rounded-md shadow-sm">
-                                    <span
-                                        class="inline-flex items-center px-3 rounded-l-md border border-r-0 dark:border-dark-second dark:bg-dark-second border-gray-300 bg-gray-50 dark:text-dark-txt text-gray-500 sm:text-sm">
-                                        https:
-                                    </span>
-                                    {{form.slug}}
-                                </div>
+                                
             
-            
-                                <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
+                                <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
                                     Nombre del grupo
                                 </label>
                                 {{form.name}}
@@ -91,11 +81,13 @@
                                 </label>
                                 {{form.numero_miembros}}
             
-            
-                                <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700 pt-4">
-                                    Activar publicación
-                                </label>
-                                {{form.active}}
+                                <div class="pt-4">
+                                    <label for="photo" class="text-sm font-medium dark:text-dark-txt text-gray-700">
+                                        Activación
+                                    </label>
+                                    {{form.active}}
+                                </div>
+                                
             
                                 <span class=" text-red-500">{{form.errors}}</span>
             
@@ -106,7 +98,7 @@
                                             Cancelar</a>
                                         <button type="submit"
                                             class="mt-4 inline-flex float-right items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-blue-700 dark:bg-dark-third bg-blue-100 dark:hover:bg-dark-third hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-blue-500">
-                                            Crear</button>
+                                            Editar Grupo</button>
                                     </div>
                                 </div>
                             </form>
