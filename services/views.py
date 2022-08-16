@@ -15,7 +15,7 @@ from django.urls.base import reverse_lazy
 from django.urls import reverse
 
 from django.contrib import messages
-# Create your views here.
+from django.db.models import Q
 
 import string
 import random
@@ -73,6 +73,16 @@ class EmpresaDetailView(LoginRequiredMixin, View):
 
         number_of_likes = len(likes)
 
+        if len(likes) == 0:
+            liked = False
+
+        for like in likes:
+            if like == request.user:
+                liked = True
+                break
+            else:
+                liked = False
+
         services_data = None
 
         if services:
@@ -82,6 +92,7 @@ class EmpresaDetailView(LoginRequiredMixin, View):
 
         context = {
             'company': company,
+            'liked':liked,
             'services': services_data,
             'number_of_likes': number_of_likes,
             'form': form
@@ -114,6 +125,7 @@ class EmpresaDetailView(LoginRequiredMixin, View):
                     'Haz creado un nuevo trabajo'
                 )
                 return redirect("services:company-detail", slug=company.slug)
+                
 
         if services:
             paginator = Paginator(services, 6)
@@ -181,7 +193,7 @@ class CreateCompanyView(View):
                 messages.add_message(
                     self.request,
                     messages.SUCCESS,
-                    'Se ha creado con exito su empresa, ya puedes compartir tu trabajo'
+                    'Se ha creado con éxito su empresa, ya puedes compartir tu trabajo'
                 )
                 return redirect("services:company-detail", slug=slug)
 
@@ -239,4 +251,43 @@ class ServiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         
         work = self.get_object()
         return self.request.user == work.company.user
+
+
+class ILikeCompany(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        company = Empresa.objects.get(pk=pk)
+        company.likes.add(request.user)
+        return redirect("services:company-detail", slug=company.slug)
+
+
+class NotLikeCompany(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        company = Empresa.objects.get(pk=pk)
+        company.likes.remove(request.user)
+        return redirect("services:company-detail", slug=company.slug)
+
+
+class ServiceDetailView(View):
+    def get(self, request, slug,*args, **kwargs):
+        service = get_object_or_404(Work, slug=slug)
+        #form = PostulationModelForm()
+        context={
+            'service':service,
+            #'form':form
+        }
+        return render(request, 'services/detail.html', context)
+
+
+
+
+class ServiceSearch(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        service_list = Work.objects.filter(Q(name__icontains=query, active=True))
+        number_of_services = len(service_list)
+        context={
+            'number_of_services':number_of_services,
+            'service_list':service_list
+        }
+        return render(request, 'services/search.html', context)
         

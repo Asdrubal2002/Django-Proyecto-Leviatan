@@ -7,8 +7,13 @@ from .views import (
     CreateCompanyView,
     CompanyUpdateView,
     ServiceUpdateView,
-    ServiceDeleteView
-    
+    ServiceDeleteView,
+    ILikeCompany,
+    NotLikeCompany,
+    ServiceDetailView,
+    ServiceSearch,
+
+
 )
 
 app_name="services"
@@ -28,6 +33,13 @@ urlpatterns = [
     path('service/<slug>/update/', ServiceUpdateView.as_view(), name="service-update"),
 
     path('service/delete/<slug>', ServiceDeleteView.as_view(), name="service-delete"),
+
+    path('service/<int:pk>/likeCompany/', ILikeCompany.as_view(), name='i-like'),
+    path('service/<int:pk>/notLikedCompany/', NotLikeCompany.as_view(), name='not_like'),
+
+    path('service/<slug>/', ServiceDetailView.as_view(), name="service-detail"),
+
+    path('search/', ServiceSearch.as_view(), name="service-search"),
 
 
 

@@ -34,8 +34,8 @@
                                 src="{{company.picture.url}}" alt="{{profile.user.username}} Profile Picture">
                         </div>
                         {% if user.is_authenticated and user != company.user %}
-                        {% if is_following %}
-                        <form method="POST" action="{% url 'users:remove-follower' profile.pk %}">
+                        {% if liked %}
+                        <form method="POST" action="{% url 'services:not_like' company.pk %}">
                             {% csrf_token %}
                             <button type="submit"
                                 class="float-right inline-flex justify-center px-4 py-2 border dark:bg-dark-main dark:border-dark-third dark:hover:bg-dark-third dark:text-dark-txt border-blue-500 shadow-sm text-md font-bold rounded-full text-blue-500 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-second focus:ring-blue-500">
@@ -43,7 +43,7 @@
                             </button>
                         </form>
                         {% else %}
-                        <form method="POST" action="#">
+                        <form method="POST" action="{% url 'services:i-like' company.pk %}">
                             {% csrf_token %}
                             <button type="submit"
                                 class="float-right inline-flex justify-center px-4 py-2 border dark:bg-dark-main dark:border-dark-third dark:hover:bg-dark-third dark:text-dark-txt border-blue-500 shadow-sm text-md font-bold rounded-full text-blue-500 dark:bg-dark-second bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-second focus:ring-blue-500">
@@ -142,17 +142,6 @@
     </div>
 
     <div class="mt-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  shadow rounded-lg bg-white dark:bg-dark-second">
-
-
-
-
-
-
-
-
-
-
-
 
         <div x-data="{ open: false }">
             {% if user.is_authenticated and user == company.user %}
@@ -259,7 +248,7 @@
             <div class="relative max-w-7xl mx-auto">
                 <div class="text-center">
                     <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
-                        Trabajos
+                        Trabajos {{company.category}}
                     </h2>
                 </div>
                 <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
@@ -267,7 +256,7 @@
                     <div class="flex flex-col rounded-lg shadow-lg overflow-hidden">
                         <div class="flex-shrink-0">
                             {% if service.thumbnail %}
-                            <a href="{% url 'books:book-detail' service.slug %}" class="block mt-2">
+                            <a href="{% url 'services:service-detail' service.slug %}" class="block mt-2">
                                 <img class="h-48 w-full object-cover" src="{{service.thumbnail.url}}" alt="">
                             </a>
                             {% endif %}
@@ -275,13 +264,8 @@
                         <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                             <div class="flex items-center justify-between px-4 py-2">
                                 <div class="flex-1">
-                                    <p class="text-sm font-medium text-blue-600">
-                                        <a>
-                                            {{service.company.category}}
-                                        </a>
-                                    </p>
                                     <span class="text-sm text-gray-500">{{service.created_on|naturaltime}}</span>
-                                    <a href="#" class="block mt-2">
+                                    <a href="{% url 'services:service-detail' service.slug %}" class="block mt-2">
                                         <p class="text-xl font-semibold text-gray-900">
                                             {{service.name}}
                                         </p>

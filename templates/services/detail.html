@@ -1,52 +1,58 @@
 {% extends 'baseMarketplace.html' %}
 {% load static %}
 
-{% block title %}Grupos{% endblock title %}
+{% block title %}Servicios{% endblock title %}
 {% block extra_head %}{% endblock extra_head %}
 
+{% load humanize %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
 {% block navbar %}
-{% include 'components/navbarGroups.html' %}
+{% include 'components/navbarServices.html' %}
 {% endblock navbar %}
 
-
 {% block content %}
+
+
 <div class="relative px-4 sm:px-6 lg:px-8 py-8">
     <div class="text-lg max-w-prose mx-auto">
         <h1>
             <span
-                class="block text-base text-center text-blue-600 font-semibold tracking-wide uppercase">{{group.category}}</span>
+                class="block text-base text-center text-blue-600 font-semibold tracking-wide uppercase">{{service.company.category}}</span>
             <span
-                class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">{{group.name}}</span>
+                class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">{{service.name}}</span>
         </h1>
-        {% if user.is_authenticated %}
-        {% if group.thumbnail %}
-        <img class="w-full rounded-lg" src="{{group.thumbnail.url}}" alt="" width="1310" height="873">
+        {% if service.thumbnail %}
+        <img class="w-full rounded-lg" src="{{service.thumbnail.url}}" alt="" width="1310" height="873">
         {% endif %}
-        {% endif %}
-        <p class="mt-8 text-lg text-gray-500 leading-4">{{group.description}}</p>
+        <p class="mt-8 text-lg text-gray-500 leading-4">{{service.presentation}}</p>
     </div>
-
-
+    {% if service.company.lugar %}
     <div class="mt-6 prose prose-blue prose-lg text-gray-500 mx-auto">
-        <p class="text-lg font-semibold text-gray-500">{{group.lugar}}</p>
+        <p class="text-lg font-semibold text-gray-500">{{service.company.lugar}}</p>
     </div>
+    {% endif %}
 
+    {% if service.price %}
     <div class="mt-6 prose prose-blue prose-lg text-gray-500 mx-auto">
-        <p class="text-lg font-semibold text-gray-500">Limite de participantes {{group.numero_miembros}} personas</p>
+        <p class="text-lg font-semibold text-gray-500">${{service.price_display}}</p>
     </div>
+    {% endif %}
+
 </div>
 {% if user.is_authenticated %}
 <div x-data="{ open: false }">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            <span class="block">¿Quieres participar?</span>
-            <span class="block text-blue-600">Preséntate ahora</span>
+            <span class="block">¿{{service.company}} te podría ayudar?</span>
+            <span class="block text-blue-600">Preséntale lo que quieres</span>
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div class="inline-flex rounded-md shadow">
                 <button @click="open = true" type="button" id="checkout-button"
                     class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                    Presentarme
+                    Presentar
                 </button>
             </div>
         </div>
@@ -119,15 +125,11 @@
     </div>
 </div>
 {% endif %}
+
+
+
 {% endblock content %}
-
-{% block footer %}
-
-{% endblock footer %}
 
 
 {% block javascript %}
-
-
-
 {% endblock javascript %}
