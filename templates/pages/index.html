@@ -77,17 +77,12 @@
                 </div>
                 <div>
                     <div class="mt-5 sm:mt-4">
-                        {% comment %}
-                        <label class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                            Body
-                        </label> {% endcomment %}
                         <div class="flex items-center justify-center">
                             <form method="POST" enctype="multipart/form-data" class="inline-flex flex-col">
                                 {% csrf_token %}
                                 <div class="mb-4">{{form.image}}</div>
 
                                 {{form.body}}
-
 
                                 <div class="block">
                                     <button type="submit"

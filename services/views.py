@@ -5,9 +5,9 @@ from django.core.paginator import Paginator
 
 from django.shortcuts import render, redirect, get_object_or_404
 
-from services.models import Empresa, Work
+from services.models import Empresa, Work, Homework, Image
 
-from services.forms import EmpresaModelForm, TrabajoModelForm
+from services.forms import EmpresaModelForm, TrabajoModelForm, HomeworkModelForm
 
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic.edit import UpdateView, DeleteView
@@ -103,8 +103,6 @@ class EmpresaDetailView(LoginRequiredMixin, View):
         company = get_object_or_404(Empresa, slug=slug)
         services = Work.objects.filter(company=company)
 
-        key = random_string_generator()
-
         if request.method == 'POST':
             form = TrabajoModelForm(request.POST, request.FILES)
             print(form)
@@ -114,7 +112,7 @@ class EmpresaDetailView(LoginRequiredMixin, View):
                 presentation = form.cleaned_data.get('presentation')
                 price = form.cleaned_data.get('price')
                 thumbnail = form.cleaned_data.get('thumbnail')
-                slug = key
+                slug = random_string_generator()
 
                 p, created = Work.objects.get_or_create(
                     company=company, name=name, presentation=presentation, price=price, thumbnail=thumbnail, slug=slug)
@@ -169,7 +167,6 @@ class CreateCompanyView(View):
         return render(request, 'services/createCompany.html', context)
 
     def post(self, request, *args, **kwargs):
-        key = random_string_generator()
         form = EmpresaModelForm()
         if request.method == "POST":
             form = EmpresaModelForm(request.POST, request.FILES)
@@ -185,7 +182,7 @@ class CreateCompanyView(View):
                 direction = form.cleaned_data.get('direction')
                 number = form.cleaned_data.get('number')
                 urlChat = form.cleaned_data.get('urlChat')
-                slug = key
+                slug = random_string_generator()
 
                 p, created = Empresa.objects.get_or_create(user=form.user, banner=banner, picture=picture, nombre=nombre, description=description,
                                                            category=category, lugar=lugar, urlChat=urlChat, schedule=schedule, direction=direction, number=number, slug=slug)
@@ -267,19 +264,6 @@ class NotLikeCompany(LoginRequiredMixin, View):
         return redirect("services:company-detail", slug=company.slug)
 
 
-class ServiceDetailView(View):
-    def get(self, request, slug,*args, **kwargs):
-        service = get_object_or_404(Work, slug=slug)
-        #form = PostulationModelForm()
-        context={
-            'service':service,
-            #'form':form
-        }
-        return render(request, 'services/detail.html', context)
-
-
-
-
 class ServiceSearch(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('query')
@@ -290,4 +274,44 @@ class ServiceSearch(LoginRequiredMixin, View):
             'service_list':service_list
         }
         return render(request, 'services/search.html', context)
+
+class ServiceDetailView(View):
+    def get(self, request, slug,*args, **kwargs):
+        service = get_object_or_404(Work, slug=slug)
+        form = HomeworkModelForm()
+        context={
+            'service':service,
+            'form':form
+        }
+        return render(request, 'services/detail.html', context)
+    def post(self, request, slug,*args, **kwargs):
+            form=HomeworkModelForm(request.POST)
+
+            files = request.FILES.getlist('image')
+            if form.is_valid():
+                new_Homework = form.save(commit=False)
+                new_Homework.user=request.user
+                new_Homework.work=get_object_or_404(Work, slug=slug)
+                new_Homework.presentation=form.cleaned_data.get('presentation')
+                new_Homework.slug=random_string_generator()
+                new_Homework.save()
         
+                for f in files:
+                    img = Image(image=f)
+                    img.save()
+                    new_Homework.image.add(img)
+
+                new_Homework.save()
+                messages.add_message(
+                    self.request,
+                    messages.SUCCESS,
+                    'Haz realizado una consulta con tu trabajo, espera la respuesta'
+                )
+                return redirect("services:services")
+
+            
+
+
+
+        
+      

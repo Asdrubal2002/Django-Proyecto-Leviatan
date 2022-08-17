@@ -1,5 +1,5 @@
 from django import forms
-from .models import Empresa, Work
+from .models import Empresa, Work, Homework
 
 CATEGORIES = (
     ('Turismo', 'Turismo'),
@@ -52,20 +52,38 @@ class EmpresaModelForm(forms.ModelForm):
 
 
 class TrabajoModelForm(forms.ModelForm):
-
     thumbnail = forms.ImageField(label='service Picture',required=True,widget=forms.FileInput)
     name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Nombre del trabajo',
                            'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
-    
     presentation = forms.CharField(widget=forms.Textarea(attrs={'rows':'3','maxlength':'400','placeholder':'Escribe una breve presentación acerca de lo que puedes hacer.',
        'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
 
     price = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Ponle un precio sin puntos ni comas.','type':'number',
-                'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=False)
+                'class': 'max-w-lg block w-full shadow-sm dark:bg-dark-third dark:focus:ring-dark-second focus:ring-blue-500 dark:focus:border-dark-second dark:text-dark-txt focus:border-blue-500 sm:max-w-xs sm:text-sm dark:border-dark-second border-gray-300 rounded-md'}), required=True)
 
     class Meta:
         model = Work
         fields = ('name','presentation','price','thumbnail','active')
+
+
+class HomeworkModelForm(forms.ModelForm):
+    presentation = forms.CharField(widget=forms.Textarea(attrs={
+            'class': 'shadow-sm focus:ring-blue-500 dark:bg-dark-third dark:text-dark-txt focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md',
+            'rows': '3',
+            'placeholder': 'Asesorías, Trabajos de obra pesada, Mantenimiento'
+            }),
+        required=True)
+
+    image = forms.FileField(widget=forms.ClearableFileInput(attrs={
+        'class': 'relative dark:text-dark-txt dark:bg-dark-second cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500',
+        'multiple': True
+        }),
+        required=False
+        )
+
+    class Meta:
+        model = Homework
+        fields=['presentation']
 
 
 

@@ -30,7 +30,7 @@ def company_directory_path_banner(instance, filename):
 
 
 def work_directory_path(instance, filename):
-    banner_pic_name = 'company/companies/{0}/{1}'.format(
+    banner_pic_name = 'company/works/{0}/{1}'.format(
         instance.name, filename)
     full_path = os.path.join(settings.MEDIA_ROOT, banner_pic_name)
 
@@ -38,6 +38,11 @@ def work_directory_path(instance, filename):
         os.remove(full_path)
 
     return banner_pic_name
+
+
+def homework_directory_path(instance, filename):
+    return 'company/homeworks/{0}'.format(filename)
+
 
 
 GROUPS_OPTIONS=(
@@ -58,6 +63,14 @@ VERIFICATION_OPTIONS=(
     ('unverified', 'unverified'),
     ('verified', 'verified'),
 )
+
+ESTATES=(
+    ('Enviada', 'Enviada'),
+    ('En_revision', 'En revisión'),
+    ('Aceptada', 'Aceptada'),
+    ('Rechazada', 'Rechazada'),
+)
+
 
 class Empresa(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
@@ -94,3 +107,22 @@ class Work(models.Model):
 
     def price_display(self):
         return "{0:.3f}".format(self.price / 1000)
+
+    def __str__(self):
+        return self.name
+
+
+class Homework(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ownerHomework")
+    image = models.ManyToManyField('Image', blank=True)
+    work = models.ForeignKey('Work', on_delete=models.CASCADE)
+    presentation = models.TextField(max_length=400)
+    created_on = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(unique=True)
+    answer = models.TextField(blank=True, null=True)
+    accepted = models.CharField(blank=False, null=False, default='Enviada',max_length=100, choices=ESTATES)
+
+class Image(models.Model):
+    image = models.ImageField(upload_to=homework_directory_path, blank=True, null=True)
+
+

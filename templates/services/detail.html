@@ -44,10 +44,10 @@
 {% if user.is_authenticated %}
 <div x-data="{ open: false }">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <a href="{% url 'services:company-detail' service.company.slug %}" class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span class="block">¿{{service.company}} te podría ayudar?</span>
             <span class="block text-blue-600">Preséntale lo que quieres</span>
-        </h2>
+        </a>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div class="inline-flex rounded-md shadow">
                 <button @click="open = true" type="button" id="checkout-button"
@@ -81,11 +81,11 @@
                         </div>
                         <div class="mt-3 text-center sm:mt-5">
                             <h3 class="text-lg leading-6 font-medium dark:text-dark-txt text-gray-900" id="modal-title">
-                                únete a {{group.name}}
+                                {{service.company}} te hace el trabajo
                             </h3>
-                            <div class="mt-2">
+                            <div class="py-4">
                                 <p class="text-sm dark:text-dark-txt text-gray-500">
-                                    Haz la diferencia
+                                    Sube una o varias muestras de lo que quieres hacer 
                                 </p>
                             </div>
                         </div>
@@ -99,12 +99,12 @@
                                 <div class="w-full border-t dark:border-dark-second border-gray-300"></div>
                             </div>
                             <div class="relative flex justify-center my-4">
-
+                                {{form.image}}
                             </div>
                         </div>
 
                         <label for="photo" class="block text-sm font-medium dark:text-dark-txt text-gray-700">
-                            Preséntate a {{group.user.username}}
+                            Describe lo que requieres
                         </label>
                         {{form.presentation}}
 
@@ -115,7 +115,7 @@
                                     Cancelar</div>
                                 <button type="submit"
                                     class="mt-4 inline-flex float-right items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded dark:text-dark-txt text-blue-700 dark:bg-dark-third bg-blue-100 dark:hover:bg-dark-third hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-dark-third focus:ring-blue-500">
-                                    Presentarme</button>
+                                    Requerir</button>
                             </div>
                         </div>
                     </form>
