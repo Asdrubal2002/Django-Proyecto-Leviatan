@@ -27,6 +27,8 @@ User = get_user_model()
 
 from django.db.models import Q
 
+from django.core.mail import send_mail
+
 
 import string
 import random
@@ -136,6 +138,14 @@ class GrouptDetailView(View):
 
                 p, created = Postulation.objects.get_or_create(user=form.user,group=group,presentation=presentation)
                 p.save()
+
+                send_mail(
+                    subject="Felicidades, te haz postulado a un grupo",
+                    message="Espera la respuesta",
+                    recipient_list=['henryasdrubalrodriguezmorales@gmail.com'],
+                    from_email="Leviatan <henry_rodriguez23201@elpoli.edu.co>"
+                )
+
                 messages.add_message(
                 self.request,
                 messages.SUCCESS,
