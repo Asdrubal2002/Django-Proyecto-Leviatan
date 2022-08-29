@@ -38,7 +38,7 @@ Proyecto realizado en Python. en el framework de Django y el administrador de ba
 
 Framework de Facebook --> Tailwind
 
-## Todo
+### Otras funcionalidades
 
 1. [x] Recuperación contraseña por correo
 1. [x] Verficación de correo electronico
